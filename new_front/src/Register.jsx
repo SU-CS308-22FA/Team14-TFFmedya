@@ -31,16 +31,6 @@ export default function Register (){
       }
     }
 
-
-
-
-
-
-
-
-
-
-
     //const [user, setUser] = useState('');
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
@@ -50,44 +40,37 @@ export default function Register (){
     const [username, setUsername] = useState('');
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-       
+      e.preventDefault();
 
-        /*fetch('http://127.0.0.1:8000/api/auth/register/', {
-            method: 'POST',
-            body: JSON.stringify({
-              // Add parameters here
-              'email' : email,
-              'password' : pass,
-              'firstname' : name,
-              'lastname' : surname,
-              'username' : username
-            }),
-            headers: {
-              'Content-type': 'application/json; charset=UTF-8',
-            },
-          })
-             .then((response) => response.json())
-             .then((data) => {
-                console.log(data);
-                // Handle data
-                //user = setUser(data);
-                
 
-             })
-            
-             .catch((err) => {
-                console.log(err.message);
-             })
-        */
-        if (errorMessage === 'Şifre uygun' && errorMessage_repeat === ''  ) {
-          
-          window.location.href = "/login";
+      fetch('http://127.0.0.1:8000/userregister', {
+          method: 'POST',
+          body: JSON.stringify({
+            // Add parameters here
+            'email' : email,
+            'password' : pass,
+            'firstname' : name,
+            'lastname' : surname,
+            'username' : username
+          }),
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        })
+           .then((response) => response.json())
+           .then((data) => {
+              console.log(data);
+              // Handle data
+              //user = setUser(data);
+              if (errorMessage === 'Şifre uygun' && errorMessage_repeat === ''  ) {
 
-        }
-        
-
-    }
+                //window.location.href = "/login";
+              }
+           })
+           .catch((err) => {
+              console.log(err.message);
+           })
+  }
 
     return (
         <div className="auth-form-container">

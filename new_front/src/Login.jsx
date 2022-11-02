@@ -9,7 +9,7 @@ import { UserProvider } from './utils/UserContext'
 export default function Login()  {
     
     const Navigate = useNavigate()
-    const melih = "malmelih"
+   
     //const [user, setUser] =useState("Select User");
    // const handleData = (data) => { setUser(data) } ; console.log(user);
 
@@ -42,21 +42,21 @@ export default function Login()  {
     */
     
     const handleSubmit = (e) => {
-        
+
         e.preventDefault();
         console.log(email );
         console.log(pass);
-        Navigate("/profile", { state: melih })
 
-        
-       
 
-        /*fetch('http://127.0.0.1:8000/api/auth/login/', {
+
+
+
+        fetch('http://127.0.0.1:8000/userlogin', {
             method: 'POST',
             body: JSON.stringify({
               // Add parameters here
-              'email' : email,
-              'password' : pass
+              'Email' : email,
+              'Password' : pass
             }),
             headers: {
               'Content-type': 'application/json; charset=UTF-8',
@@ -65,22 +65,22 @@ export default function Login()  {
              .then((response) => response.json())
              .then((data) => {
                 console.log(data);
-                
-                <UserProvider
-                value={
-                user={user}}
-                handleChangeUser={setUser}
-                handleData={handleData}
-                >
-                </UserProvider>
-               
-                Navigate("/profile", { state: data })
+
+                /*
+                if response.body= {
+
+                    Navigate("/profile", { state: data })
+                }
+                */
+
+
+
                 // Handle data
              })
              .catch((err) => {
                 console.log(err.message);
              })
-             */
+
     }
 
 

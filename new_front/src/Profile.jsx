@@ -10,8 +10,8 @@ import Register from "./Register";
 export default function Profile (){
 
 
-    const melih = useLocation().state;
-    console.log(melih);
+    const user_data = useLocation().state;
+    console.log(user_data);
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [pass_repeat, setPass_repeat] = useState('');
@@ -34,13 +34,43 @@ export default function Profile (){
 
     const handleDeletion = (e) => {
         e.preventDefault();
-    
 
-        fetch('http://127.0.0.1:8000/api/auth/register/', {
-            method: 'POST',
+
+        fetch('http://127.0.0.1:8000/userregister', {
+            method: 'DELETE',
             body: JSON.stringify({
                 // Add parameters here
-                'email' : email,
+                'Email' : email,
+            
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                console.log(data);
+                // Handle data
+
+                })
+
+                .catch((err) => {
+                console.log(err.message);
+                })
+
+        //window.location.href = "/login";
+
+    }
+
+
+    const handleUpdate = (e) => {
+        e.preventDefault();
+
+
+        fetch('http://127.0.0.1:8000/userregister', {
+            method: 'PUT',
+            body: JSON.stringify({
+                // Add parameters here
                 'password' : pass,
                 'firstname' : name,
                 'lastname' : surname,
@@ -54,16 +84,16 @@ export default function Profile (){
                 .then((data) => {
                 console.log(data);
                 // Handle data
-                
+
                 })
-            
+
                 .catch((err) => {
                 console.log(err.message);
                 })
 
         //window.location.href = "/login";
 
-    }   
+    }
 
     return (
         
@@ -71,9 +101,9 @@ export default function Profile (){
           
         <div className="auth-form-container">
             <h2>Profiliniz</h2>
-        <form className="register-form" onSubmit={handleSubmit}>
+        <form className="register-form" onSubmit={handleUpdate}>
             <label htmlFor="name">İsim</label>
-            <input value={name} onChange={(e) => setName(e.target.value)}type="name" placeholder="İsim" id="name" name="name" />
+            <input value={name} onChange={(e) => setName(e.target.value)}type="name" placeholder="Allaj" id="name" name="name" />
             <label htmlFor="surname">Soyisim</label>
             <input value={surname} onChange={(e) => setSurname(e.target.value)}type="surname" placeholder="Soyisim" id="surname" name="surname" />
             <label htmlFor="username">Kullanıcı İsmi</label>
@@ -84,7 +114,7 @@ export default function Profile (){
             
         </form>
         <p></p>
-        <button type="submit" /*onClick={handleDeletion()}*/ >Profilimi sil</button>
+        <button type="submit" onClick={handleDeletion()} >Profilimi sil</button>
             
         
     </div>
