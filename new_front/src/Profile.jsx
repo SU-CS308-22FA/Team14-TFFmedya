@@ -12,20 +12,17 @@ export default function Profile (){
 
     const user_data = useLocation().state;
     console.log(user_data);
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
-    const [pass_repeat, setPass_repeat] = useState('');
-    const [name, setName] = useState('');
-    const [surname, setSurname] = useState('');
-    const [username, setUsername] = useState('');
+    const [pass, setPass] = useState(user_data.Password);
+    const [name, setName] = useState(user_data.FirstName);
+    const [surname, setSurname] = useState(user_data.LastName);
+    const [username, setUsername] = useState(user_data.UserName);
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(name);
         console.log(surname);
         console.log(username);
-        console.log(email);
         console.log(pass);
-        console.log(pass_repeat);
         
         //window.location.href = "/login";
 
@@ -104,13 +101,13 @@ export default function Profile (){
             <h2>Profiliniz</h2>
         <form className="register-form" onSubmit={handleUpdate}>
             <label htmlFor="name">İsim</label>
-            <input value={name} onChange={(e) => setName(e.target.value)}type="name" placeholder="Allaj" id="name" name="name" />
+            <input value={name} onChange={(e) => setName(e.target.value)}type="name"  id="name" name="name" />
             <label htmlFor="surname">Soyisim</label>
-            <input value={surname} onChange={(e) => setSurname(e.target.value)}type="surname" placeholder="Soyisim" id="surname" name="surname" />
+            <input value={surname} onChange={(e) => setSurname(e.target.value)}type="surname"  id="surname" name="surname" />
             <label htmlFor="username">Kullanıcı İsmi</label>
-            <input value={username} onChange={(e) => setUsername(e.target.value)}type="username" placeholder="Kullanıcı Adı" id="username" name="username"/>
+            <input value={username} onChange={(e) => setUsername(e.target.value)}type="username"  id="username" name="username"/>
             <label htmlFor="password">Şifre</label>
-            <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
+            <input value={pass} onChange={(e) => setPass(e.target.value)} type="password"  id="password" name="password" />
             <button type="submit" >Düzenle</button>
             
         </form>
