@@ -62,9 +62,9 @@ export default function Register (){
               console.log(data);
               // Handle data
               //user = setUser(data);
-              if (errorMessage === 'Şifre uygun' && errorMessage_repeat === ''  ) {
+              if (errorMessage === 'Şifre uygun' && errorMessage_repeat === '' && data !== "Failed to Add" ) {
 
-                //window.location.href = "/login";
+                window.location.href = "/login";
               }
            })
            .catch((err) => {
