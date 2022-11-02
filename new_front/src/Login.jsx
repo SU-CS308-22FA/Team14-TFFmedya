@@ -7,7 +7,7 @@ import { UserProvider } from './utils/UserContext'
 //import { loginUser, setAxiosAuthToken, setToken, getCurrentUser, unsetCurrentUser } from './services/auth';
 
 export default function Login()  {
-    
+    const [errorMessage, setErrorMessage] = useState('')
     const Navigate = useNavigate()
    
     //const [user, setUser] =useState("Select User");
@@ -65,7 +65,14 @@ export default function Login()  {
              .then((response) => response.json())
              .then((data) => {
                 console.log(data);
+                if (data !== "There is no user with this email.") {
+                    //Login successful
 
+                    Navigate("/profile", { state: data })
+                }
+                else {
+                    
+                }
                 /*
                 if response.body= {
 

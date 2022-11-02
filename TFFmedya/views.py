@@ -93,6 +93,7 @@ def userRegisterApi(request,id=0):
             return JsonResponse("Updated Successfully",safe=False)
         return JsonResponse("Failed to Update")
     elif request.method=='DELETE':
-        user=User.objects.get(UserId=id)
+        User_data=JSONParser().parse(request)
+        user=User.objects.get(Email=User_data['Email'])
         user.delete()
         return JsonResponse("Deleted Successfully",safe=False)
