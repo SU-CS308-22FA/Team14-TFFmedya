@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate  } from 'react-router-dom'
-import { UserProvider } from './utils/UserContext'
+//import { UserProvider } from './utils/UserContext'
 
 
 //import { UserContext } from './utils/UserContext'
@@ -9,7 +9,7 @@ import { UserProvider } from './utils/UserContext'
 export default function Login()  {
     const [errorMessage, setErrorMessage] = useState('')
     const Navigate = useNavigate()
-   
+    
     //const [user, setUser] =useState("Select User");
    // const handleData = (data) => { setUser(data) } ; console.log(user);
 
@@ -71,7 +71,9 @@ export default function Login()  {
                     Navigate("/profile", { state: data })
                 }
                 else {
-                    
+                   
+                    setErrorMessage("Mail veya şifre bilginiz hatalı!")
+
                 }
                 /*
                 if response.body= {
@@ -107,6 +109,14 @@ export default function Login()  {
                 <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="Lütfen mailinizi giriniz" id="email" name="email" required/>
                 <label htmlFor="password">Şifre</label>
                 <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" required/>
+
+                {errorMessage === '' ? null :
+                    <span style={{
+                      fontWeight: 'bold',
+                      color: 'red', 
+                      
+                    }}>{errorMessage}<br/></span> }
+                
                 <button type="submit" >Giriş</button>
                 
             </form>
