@@ -101,13 +101,13 @@ export default function Profile (){
             <h2>Profiliniz</h2>
         <form className="register-form" onSubmit={handleUpdate}>
             <label htmlFor="name">İsim</label>
-            <input value={name} onChange={(e) => setName(e.target.value)}type="name"  id="name" name="name" />
+            <input value={name} onChange={(e) => setName(e.target.value)}type="name"  id="name" name="name" required />
             <label htmlFor="surname">Soyisim</label>
-            <input value={surname} onChange={(e) => setSurname(e.target.value)}type="surname"  id="surname" name="surname" />
+            <input value={surname} onChange={(e) => setSurname(e.target.value)}type="surname"  id="surname" name="surname" required/>
             <label htmlFor="username">Kullanıcı İsmi</label>
-            <input value={username} onChange={(e) => setUsername(e.target.value)}type="username"  id="username" name="username"/>
+            <input value={username} onChange={(e) => setUsername(e.target.value)}type="username"  id="username" name="username" required/>
             <label htmlFor="password">Şifre</label>
-            <input value={pass} onChange={(e) => setPass(e.target.value)} type="password"  id="password" name="password" />
+            <input value={pass} onChange={(e) => setPass(e.target.value)} type="password"  id="password" name="password"required />
             <button type="submit" >Düzenle</button>
             
         </form>
