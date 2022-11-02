@@ -12,4 +12,6 @@ urlpatterns=[
     url(r'^player/([0-9]+)$',views.playerApi),
     url(r'^userlogin$',views.userLoginApi),
     url(r'^userregister$',views.userRegisterApi),
+    url(r'^userupdate$',views.userUpdateApi),
+    url(r'^userdelete$',views.userDeleteApi),
     url(r'^user/([0-9]+)$',views.userRegisterApi)]

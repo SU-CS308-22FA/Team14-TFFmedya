@@ -36,11 +36,11 @@ export default function Profile (){
         e.preventDefault();
 
 
-        fetch('http://127.0.0.1:8000/userregister', {
-            method: 'DELETE',
+        fetch('http://127.0.0.1:8000/userdelete', {
+            method: 'POST',
             body: JSON.stringify({
                 // Add parameters here
-                'Email' : email,
+                'Email' : user_data.Email,
             
             }),
             headers: {
@@ -67,14 +67,15 @@ export default function Profile (){
         e.preventDefault();
 
 
-        fetch('http://127.0.0.1:8000/userregister', {
-            method: 'PUT',
+        fetch('http://127.0.0.1:8000/userupdate', {
+            method: 'POST',
             body: JSON.stringify({
                 // Add parameters here
-                'password' : pass,
-                'firstname' : name,
-                'lastname' : surname,
-                'username' : username
+                'Email' : user_data.Email,
+                'Password' : pass,
+                'FirstName' : name,
+                'LastName' : surname,
+                'UserName' : username
             }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
@@ -114,7 +115,7 @@ export default function Profile (){
             
         </form>
         <p></p>
-        <button type="submit" onClick={handleDeletion()} >Profilimi sil</button>
+        <button type="submit" onClick={handleDeletion} >Profilimi sil</button>
             
         
     </div>

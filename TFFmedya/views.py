@@ -84,7 +84,10 @@ def userRegisterApi(request,id=0):
             User_serializer.save()
             return JsonResponse("Added Successfully",safe=False)
         return JsonResponse("Failed to Add",safe=False)
-    elif request.method=='PUT':
+
+@csrf_exempt
+def userUpdateApi(request,id=0):
+    if request.method=='POST':
         User_data=JSONParser().parse(request)
         user=User.objects.get(Email=User_data['Email'])
         User_serializer=UserSerializer(user,data=User_data)
@@ -92,7 +95,10 @@ def userRegisterApi(request,id=0):
             User_serializer.save()
             return JsonResponse("Updated Successfully",safe=False)
         return JsonResponse("Failed to Update")
-    elif request.method=='DELETE':
+
+@csrf_exempt
+def userDeleteApi(request,id=0):
+    if request.method=='POST':
         User_data=JSONParser().parse(request)
         user=User.objects.get(Email=User_data['Email'])
         user.delete()

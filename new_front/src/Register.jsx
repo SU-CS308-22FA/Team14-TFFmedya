@@ -47,11 +47,11 @@ export default function Register (){
           method: 'POST',
           body: JSON.stringify({
             // Add parameters here
-            'email' : email,
-            'password' : pass,
-            'firstname' : name,
-            'lastname' : surname,
-            'username' : username
+            'Email' : email,
+            'Password' : pass,
+            'FirstName' : name,
+            'LastName' : surname,
+            'UserName' : username
           }),
           headers: {
             'Content-type': 'application/json; charset=UTF-8',
