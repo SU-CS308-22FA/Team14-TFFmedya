@@ -11,7 +11,8 @@ export default function Profile (){
 
 
     const user_data = useLocation().state;
-    console.log(user_data);
+    const [Message, setMessage] = useState('');
+    //console.log(user_data);
     const [pass, setPass] = useState(user_data.Password);
     const [name, setName] = useState(user_data.FirstName);
     const [surname, setSurname] = useState(user_data.LastName);
@@ -46,8 +47,12 @@ export default function Profile (){
             })
                 .then((response) => response.json())
                 .then((data) => {
-                console.log(data);
-                // Handle data
+                    console.log(data);
+                    // Handle data
+
+                    if (data === "Deleted Successfully") {
+                        window.location.href = "/";
+                    }
 
                 })
 
@@ -80,9 +85,11 @@ export default function Profile (){
             })
                 .then((response) => response.json())
                 .then((data) => {
-                console.log(data);
-                // Handle data
-
+                    console.log(data);
+                    // Handle data
+                    if (data === "Updated Successfully") {
+                        setMessage("Profil güncellendi.");
+                    }
                 })
 
                 .catch((err) => {
@@ -109,6 +116,13 @@ export default function Profile (){
             <label htmlFor="password">Şifre</label>
             <input value={pass} onChange={(e) => setPass(e.target.value)} type="password"  id="password" name="password"required />
             <button type="submit" >Düzenle</button>
+
+            {Message === '' ? null :
+                <span style={{
+                    fontWeight: 'bold',
+                    color: 'green', 
+                    
+                }}>{Message}<br/></span> }
             
         </form>
         <p></p>

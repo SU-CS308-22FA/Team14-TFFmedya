@@ -1,6 +1,8 @@
 //import React, { useState } from "react";
 //import logo from './logo.svg';
 import './App.css';
+import {LeafPoll, Result } from 'react-leaf-polls'
+
 import { UserProvider } from "./utils/UserContext";
 import { useState } from 'react';
 
@@ -11,6 +13,8 @@ import Home from "./Home";
 import { Route , Routes  } from "react-router-dom";
 import Navbar from './Navbar';
 import Profile from './Profile';
+import PollPage from './Poll';
+
 
 
 function App() {
@@ -28,7 +32,9 @@ function App() {
           <Route path="/" element={<Home />} />   
           <Route path="/login" element={<Login />} />  
           <Route path="/register" element={<Register />} />  
-          <Route path="/profile" element={<Profile />} />  
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/poll" element={<PollPage />} />  
+
           
         </Routes>
         
