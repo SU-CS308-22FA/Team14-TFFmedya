@@ -17,7 +17,7 @@ class Player(models.Model):
 class User(models.Model):
     UserId = models.AutoField(primary_key=True)
     Email = models.EmailField(unique=True, max_length=255)
-    UserName = models.CharField(max_length=100)
+    UserName = models.CharField(max_length=100, unique=True)
     FirstName = models.CharField(max_length=100)
     LastName = models.CharField(max_length=100)
     Password = models.CharField(max_length=100)
