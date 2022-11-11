@@ -40,7 +40,8 @@ export default function PollPage () {
     
       }
      
-      const handleremove= index=>{
+      const handleremove= (e,index)=>{
+        e.preventDefault();
         const list=[...inputList];
         list.splice(index,1);
         setinputList(list);
@@ -94,12 +95,16 @@ export default function PollPage () {
     
     return (
 
+<div style={{ display: 'block',                   width: 700, padding: 30 }}>
 
-    <Container className="content">
+    <Container fluid>
+    <form role="form" onSubmit={handleSubmit}>
+
      <div className="row">
        <div className="col-sm-12">   
           <div class="form-group col-md-4">
             <label >Enter your poll question</label>
+            <br></br>
             <input type="text"  name="firstName" class="form-control"  placeholder="Poll question"  />
           </div>
 
@@ -109,18 +114,26 @@ export default function PollPage () {
               <div className="row mb-3">
                  
                <div class="form-group col-md-4">
-               <label >Add the first option</label>
+               <label >Add option {i+1}</label>
+               <br></br>
                   <input type="text"  name="lastName" class="form-control"   placeholder="Option 1" onChange={ e=>handleinputchange(e,i) }/>
-               </div>
-               <div class="form-group col-md-2 mt-4">
-               {
+                  
+                  <view style= {{marginLeft: 10}} >
+                  {
                   inputList.length!==1 &&
-                  <button  className="btn btn-danger mx-1" onClick={()=> handleremove(i)}>Remove</button>
-               }
-               { inputList.length-1===i &&
-                  <button  className="btn btn-success" onClick={ handleaddclick}>Add More</button>
-               }
+                  <button  className="btn btn-danger mx-1" onClick={e => handleremove(e,i)}>Remove</button>
+                  }
+                  </view>
+                  <view style= {{marginLeft: 10}}>
+                  { inputList.length-1===i &&
+                      <button  className="btn btn-success" onClick={ handleaddclick}>Add More</button>
+                  }
+                  </view>
+
+
                </div>
+
+             
             </div>
               );
              } )} 
@@ -128,7 +141,10 @@ export default function PollPage () {
                
        </div>
      </div>
+     <button type="submit" id="submit" name="submit" className="btn btn-primary pull-right">Add Post</button>
+    </form>
     </Container>
+    </div>
         /*
         //<div className="col-md-5">
           //<div className="form-area">  
