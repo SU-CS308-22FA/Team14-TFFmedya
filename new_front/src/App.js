@@ -13,13 +13,14 @@ import Home from "./Home";
 import { Route , Routes  } from "react-router-dom";
 import Navbar from './Navbar';
 import Profile from './Profile';
-import PollPage from './Poll';
+import PollPage from './Poll_Page';
+import PollCreate from './Poll_Create';
+
+
 
 
 
 function App() {
-
-
 
  
   return(
@@ -33,7 +34,9 @@ function App() {
           <Route path="/login" element={<Login />} />  
           <Route path="/register" element={<Register />} />  
           <Route path="/profile" element={<Profile />} />
-          <Route path="/poll" element={<PollPage />} />  
+          <Route path="/poll" element={<PollPage />} /> 
+          <Route path="/poll_create" element={<PollCreate />} /> 
+
 
           
         </Routes>

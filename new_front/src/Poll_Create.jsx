@@ -5,11 +5,14 @@ import 'react-leaf-polls/dist/index.css'
 import Poll from 'react-polls';
 import { Container } from "react-bootstrap";
 
+export var Q = "";
+export var OPTION_LIST = [];
 
-
-export default function PollPage () {
+export default function PollCreate () {
     const [errorMessage, setErrorMessage] = useState('')
     const Navigate = useNavigate()
+
+    const [question, setQuestion] = useState('')
 
     /*
     const pollQuestion = 'Is react-polls useful?'
@@ -30,9 +33,10 @@ export default function PollPage () {
         })
     }*/
 
-      const [inputList, setinputList]= useState([{ lastName:''}]);
+      const [inputList, setinputList]= useState([{ option:''}]);
     
       const handleinputchange=(e, index)=>{
+        console.log("QQ:", question);
         const {value}= e.target;
         const list= [...inputList];
         list[index]= value;
@@ -43,22 +47,30 @@ export default function PollPage () {
       const handleremove= (e,index)=>{
         e.preventDefault();
         const list=[...inputList];
+        console.log("Before splice remove: ", list)
         list.splice(index,1);
+        console.log("Handleremove: ", list)
         setinputList(list);
+        
       }
     
-      const handleaddclick=()=>{ 
+      const handleaddclick=(e)=>{ 
         console.log(inputList);
-        setinputList([...inputList, { lastName:''}]);
+        setinputList([...inputList, e.target.value]);
+        console.log("List:", inputList);
       }
 
     
     const handleSubmit = (e) => {
 
         e.preventDefault();
-        Navigate("/");
+        Q = question;
+        OPTION_LIST = inputList;
+        Navigate("/poll");
         //console.log(email );
         //console.log(pass);
+
+        
 
         /*
         fetch('http://127.0.0.1:8000/userlogin', {
@@ -105,7 +117,7 @@ export default function PollPage () {
           <div class="form-group col-md-4">
             <label >Enter your poll question</label>
             <br></br>
-            <input type="text"  name="firstName" class="form-control"  placeholder="Poll question"  />
+            <input type="text"  name="firstName" class="form-control" value={question} placeholder="Poll question" onChange={e => setQuestion(e.target.value)} />
           </div>
 
             { 
@@ -116,7 +128,7 @@ export default function PollPage () {
                <div class="form-group col-md-4">
                <label >Add option {i+1}</label>
                <br></br>
-                  <input type="text"  name="lastName" class="form-control"   placeholder="Option 1" onChange={ e=>handleinputchange(e,i) }/>
+                  <input value = {inputList[i]== "[object Object]" ? '' : inputList[i]} type="text" name="option" class="form-control" placeholder="Option i+1" onChange={ e=>handleinputchange(e,i) }/>
                   
                   <view style= {{marginLeft: 10}} >
                   {
@@ -126,7 +138,7 @@ export default function PollPage () {
                   </view>
                   <view style= {{marginLeft: 10}}>
                   { inputList.length-1===i &&
-                      <button  className="btn btn-success" onClick={ handleaddclick}>Add More</button>
+                      <button  className="btn btn-success" onClick={ e=>handleaddclick(e)}>Add More</button>
                   }
                   </view>
 
