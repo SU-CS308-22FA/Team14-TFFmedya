@@ -8,6 +8,7 @@ import { Container } from "react-bootstrap";
 export var Q = "";
 export var OPTION_LIST = [];
 
+
 export default function PollCreate () {
     const [errorMessage, setErrorMessage] = useState('')
     const Navigate = useNavigate()
@@ -64,21 +65,33 @@ export default function PollCreate () {
     const handleSubmit = (e) => {
 
         e.preventDefault();
+        var choices = [];
         Q = question;
-        OPTION_LIST = inputList;
-        Navigate("/poll");
+        for (var i in inputList)
+        {
+          var d = {"choice_text":inputList[i], "votes":0}
+          choices.push(d)
+          console.log(choices[i])
+
+        }
+
+
+        console.log(choices)
+        //Navigate("/poll");
         //console.log(email );
         //console.log(pass);
 
         
 
-        /*
-        fetch('http://127.0.0.1:8000/userlogin', {
+        
+        fetch('http://127.0.0.1:8000/poll/create', {
             method: 'POST',
             body: JSON.stringify({
               // Add parameters here
-              'Title' : title,
-              'Subject' : subject
+              'question_text' : question,
+              'pub_date' : '2022-11-14',
+              'choices' : choices
+              
             }),
             headers: {
               'Content-type': 'application/json; charset=UTF-8',
@@ -87,20 +100,20 @@ export default function PollCreate () {
              .then((response) => response.json())
              .then((data) => {
                 console.log(data);
-                if (data !== "There is no user with this email.") {
+                if (data === "Question Added Successfully") {
 
-                    Navigate("/profile", { state: data })
+                    Navigate("/poll", { state: data })
                 }
                 else {
                    
-                    setErrorMessage("Mail veya şifre bilginiz hatalı!")
+                    setErrorMessage("Could not create the poll")
 
                 }
 
              })
              .catch((err) => {
                 console.log(err.message);
-             })*/
+             })
 
     }
 

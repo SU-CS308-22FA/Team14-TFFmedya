@@ -15,6 +15,7 @@ export default function PollPage () {
         Navigate("/poll_create");
     }
 
+
     const handleVote = voteAnswer => {
         const { OPTION_LIST } = this.state
         const newPollAnswers = OPTION_LIST.map(answer => {
@@ -25,16 +26,13 @@ export default function PollPage () {
           OPTION_LIST: newPollAnswers
         })
     }
+
     return (
         <form role="form" onSubmit={handleSubmit}>
     
         <div>
         
         <button type="submit" id="submit" name="submit" className="btn btn-primary pull-right">Create Poll</button>
-
-
-        <text>{Q}</text>
-        <text>{OPTION_LIST[0]}</text>
         
         
         <div>
