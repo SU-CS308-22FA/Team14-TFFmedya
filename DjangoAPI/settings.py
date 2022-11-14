@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'TFFmedya.apps.TffmedyaConfig',
     'rest_framework',
+    'Polls',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
