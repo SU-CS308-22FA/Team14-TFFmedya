@@ -7,27 +7,27 @@ import {useQuery} from "react-query"
 
 
 var QQ = "lol"
-const Get_Poll = async () => 
+async function Get_Poll()
 {
-  await fetch('http://127.0.0.1:8000/poll/index', {
+  let response = await fetch('http://127.0.0.1:8000/poll/index', {
       method: 'POST',
       headers: {
           'Content-type': 'application/json; charset=UTF-8',
       },
       })
+      /*
           .then((response) => response.json())
           .then((data) => {
               console.log(data);
               console.log(data[0].choices[0].option);
 
               // Handle data
-              return data;
           })
 
           .catch((err) => {
           console.log(err.message);
-          })
-
+          })*/
+    return response.json()
 
 }
 
@@ -35,8 +35,9 @@ const Get_Poll = async () =>
 
 export default function PollPage () {
 
-    //const {data, status} = useQuery(Get_Poll())
-    //console.log(data)
+    const {data, status} = useQuery(["Questions"], Get_Poll)
+    //var data = Get_Poll();
+    console.log("Line 39: ", typeof(data))
 
     const Navigate = useNavigate()
 
@@ -52,15 +53,21 @@ export default function PollPage () {
 
     
 
-    const handleVote = (i, voteAnswer) => {
-        const {data} = this.state
+    const handleVote = (voteAnswer,i) => {
+        //const {d} = this.state
+        console.log("Data???",voteAnswer)
+        console.log("i:", i)
         const newPollAnswers = data[i].choices.map(answer => {
           if (answer.option === voteAnswer) answer.votes++
+          console.log("votes:",answer, answer.votes)
           return answer
         })
+        /*
         this.setState({
-            data: newPollAnswers
-        })
+            d: newPollAnswers
+            
+        })*/
+        console.log(data[0])
     }
 
   
@@ -75,12 +82,12 @@ export default function PollPage () {
 
         </div>
       
-        {/*
-
+        
+        
         <div>
             
             
-            { status==="pending" && <div>Loading data</div>}
+            { status==="loading" && <div>Loading data</div>}
             { status==="error" && <div>Error fetching</div>}
          
 
@@ -88,7 +95,7 @@ export default function PollPage () {
                 status=== "success" &&(
                     <div>
                     {
-                        data.map( (x,i)=>
+                        data.map( (x, i)=>
                         {
                             return(
                             <div className="row mb-3">
@@ -96,7 +103,7 @@ export default function PollPage () {
                             <div class="form-group col-md-4">
                             
                             <br></br>
-                                <Poll question={QQ} /*answers={data[i].choices} onVote={(data,i) => handleVote(data, i)}/>
+                                <Poll question={data[i].question_text} answers={data[i].choices} onVote={(b) => handleVote(b,i)}/>
 
                             </div>
 
@@ -112,7 +119,8 @@ export default function PollPage () {
             
 
         </div>
-        */}
+        
+        
         
         
         </form>

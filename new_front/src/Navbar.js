@@ -2,7 +2,7 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom";
 
 export default function Navbar(){
    
-    return( 
+    return(
     <nav className="nav">
         
         <ul> 
