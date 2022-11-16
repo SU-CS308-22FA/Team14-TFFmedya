@@ -3,9 +3,40 @@ import { Link, useNavigate  } from 'react-router-dom'
 import {Q} from './Poll_Create'
 import {OPTION_LIST} from './Poll_Create'
 import Poll from 'react-polls';
+import {useQuery} from "react-query"
+
+
+var QQ = "lol"
+const Get_Poll = async () => 
+{
+  await fetch('http://127.0.0.1:8000/poll/index', {
+      method: 'POST',
+      headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+      },
+      })
+          .then((response) => response.json())
+          .then((data) => {
+              console.log(data);
+              console.log(data[0].choices[0].option);
+
+              // Handle data
+              return data;
+          })
+
+          .catch((err) => {
+          console.log(err.message);
+          })
+
+
+}
+
 
 
 export default function PollPage () {
+
+    //const {data, status} = useQuery(Get_Poll())
+    //console.log(data)
 
     const Navigate = useNavigate()
 
@@ -16,17 +47,23 @@ export default function PollPage () {
     }
 
 
-    const handleVote = voteAnswer => {
-        const { OPTION_LIST } = this.state
-        const newPollAnswers = OPTION_LIST.map(answer => {
+    //var data = Get_Poll();
+    
+
+    
+
+    const handleVote = (i, voteAnswer) => {
+        const {data} = this.state
+        const newPollAnswers = data[i].choices.map(answer => {
           if (answer.option === voteAnswer) answer.votes++
           return answer
         })
         this.setState({
-          OPTION_LIST: newPollAnswers
+            data: newPollAnswers
         })
     }
 
+  
     return (
         <form role="form" onSubmit={handleSubmit}>
     
@@ -34,14 +71,52 @@ export default function PollPage () {
         
         <button type="submit" id="submit" name="submit" className="btn btn-primary pull-right">Create Poll</button>
         
-        
-        <div>
-        <Poll question={Q} answers={OPTION_LIST} onVote={handleVote} />
-        </div>
-        
+
 
         </div>
+      
+        {/*
+
+        <div>
+            
+            
+            { status==="pending" && <div>Loading data</div>}
+            { status==="error" && <div>Error fetching</div>}
+         
+
+            {
+                status=== "success" &&(
+                    <div>
+                    {
+                        data.map( (x,i)=>
+                        {
+                            return(
+                            <div className="row mb-3">
+                                
+                            <div class="form-group col-md-4">
+                            
+                            <br></br>
+                                <Poll question={QQ} /*answers={data[i].choices} onVote={(data,i) => handleVote(data, i)}/>
+
+                            </div>
+
+                            
+                            </div>
+                            );
+                        })
+                    }
+                    </div>
+                )
+            }
+        
+            
+
+        </div>
+        */}
+        
+        
         </form>
+        
 
        
            

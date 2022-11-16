@@ -69,7 +69,7 @@ export default function PollCreate () {
         Q = question;
         for (var i in inputList)
         {
-          var d = {"choice_text":inputList[i], "votes":0}
+          var d = {"option":inputList[i], "votes":0}
           choices.push(d)
           console.log(choices[i])
 
