@@ -66,8 +66,10 @@ export default function PollPage () {
         this.setState({
             d: newPollAnswers
             
-        })*/
+        })
         console.log(data[0])
+        */
+       
     }
 
   
