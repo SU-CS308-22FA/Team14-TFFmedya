@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'TFFmedya.apps.TffmedyaConfig',
     'rest_framework',
     'Polls',
+    'FixtureRefresh',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True

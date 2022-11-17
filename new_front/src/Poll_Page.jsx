@@ -3,7 +3,7 @@ import { Link, useNavigate  } from 'react-router-dom'
 import {Q} from './Poll_Create'
 import {OPTION_LIST} from './Poll_Create'
 import Poll from 'react-polls';
-import {useQuery} from "react-query"
+//import {useQuery} from "react-query"
 
 
 var QQ = "lol"
