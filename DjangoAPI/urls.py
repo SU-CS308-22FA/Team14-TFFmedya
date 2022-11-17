@@ -21,6 +21,6 @@ from django.urls import re_path as url
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^',include('TFFmedya.urls')),
-    url(r'^poll/', include('Polls.urls'))
-    
+    url(r'^poll/', include('Polls.urls')),
+    url(r'^fixture/', include('FixtureRefresh.urls'))
 ]
