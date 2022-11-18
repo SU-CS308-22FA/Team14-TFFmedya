@@ -6,5 +6,5 @@ from django.conf import settings
 
 urlpatterns=[
     url(r'^fixtureCreate$',views.fixtureCreateApi),
-    url(r'^`fixtureShow`$',views.fixtureShowApi)
+    url(r'^fixtureShow$',views.fixtureShowApi)
 ]
