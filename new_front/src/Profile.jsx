@@ -17,18 +17,18 @@ export default function Profile (){
     const [name, setName] = useState(user_data.FirstName);
     const [surname, setSurname] = useState(user_data.LastName);
     const [username, setUsername] = useState(user_data.UserName);
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(name);
         console.log(surname);
         console.log(username);
         console.log(pass);
-        
+
         //window.location.href = "/login";
 
     }
-    
+
 
     const handleDeletion = (e) => {
         e.preventDefault();
@@ -39,7 +39,7 @@ export default function Profile (){
             body: JSON.stringify({
                 // Add parameters here
                 'Email' : user_data.Email,
-            
+
             }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
@@ -101,9 +101,9 @@ export default function Profile (){
     }
 
     return (
-        
-        
-          
+
+
+
         <div className="auth-form-container">
             <h2>Profiliniz</h2>
         <form className="register-form" onSubmit={handleUpdate}>
@@ -115,22 +115,21 @@ export default function Profile (){
             <input value={username} onChange={(e) => setUsername(e.target.value)}type="username"  id="username" name="username" required/>
             <label htmlFor="password">Şifre</label>
             <input value={pass} onChange={(e) => setPass(e.target.value)} type="password"  id="password" name="password"required />
-            <button type="submit" >Düzenle</button>
-
+            <button style={{marginBottom : '5px'}} type="submit" >Düzenle</button>
             {Message === '' ? null :
                 <span style={{
                     fontWeight: 'bold',
-                    color: 'green', 
-                    
+                    color: 'green',
+
                 }}>{Message}<br/></span> }
-            
+
         </form>
         <p></p>
-        <button type="submit" onClick={handleDeletion} >Profilimi sil</button>
-            
-        
+            <button style={{marginTop : '5px'}} type="submit" onClick={handleDeletion} >Profilimi sil</button>
+
+
     </div>
-   
+
     )
 }
 
