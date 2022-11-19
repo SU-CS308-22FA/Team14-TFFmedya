@@ -14,4 +14,5 @@ urlpatterns=[
     url(r'^userregister$',views.userRegisterApi),
     url(r'^userupdate$',views.userUpdateApi),
     url(r'^userdelete$',views.userDeleteApi),
-    url(r'^user/([0-9]+)$',views.userRegisterApi)]
+    url(r'^user/([0-9]+)$',views.userRegisterApi),
+    url(r'^userforgotpassword',views.userForgotPasswordApi)]

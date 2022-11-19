@@ -86,6 +86,18 @@ def userRegisterApi(request,id=0):
         return JsonResponse("Failed to Add",safe=False)
 
 @csrf_exempt
+def userForgotPasswordApi(request,id=0):
+    if request.method=='POST':
+        User_data=JSONParser().parse(request)
+        eposta = User_data['Email']
+        try:
+            user = User.objects.get(Email=eposta)
+        except:
+            return JsonResponse("There is no user with this email.", safe=False)
+        User_serializer=UserSerializer(user)
+        return JsonResponse(User_serializer.data,safe=False)        
+
+@csrf_exempt
 def userUpdateApi(request,id=0):
     if request.method=='POST':
         User_data=JSONParser().parse(request)
