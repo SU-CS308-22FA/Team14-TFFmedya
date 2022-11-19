@@ -21,3 +21,5 @@ class User(models.Model):
     FirstName = models.CharField(max_length=100)
     LastName = models.CharField(max_length=100)
     Password = models.CharField(max_length=100)
+    is_moderator = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
