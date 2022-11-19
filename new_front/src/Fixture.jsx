@@ -1,10 +1,10 @@
 import { Container } from "react-bootstrap";
 import Stack from 'react-bootstrap/Stack';
 import Card from 'react-bootstrap/Card';
-import './App.css';
 import { useQuery } from "react-query";
+import './Fixture.css';
 //import Item from 'react-css-grid'
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 
 const dummyList = [{HomeTeam:"Trabzonspor", AwayTeam:"Fenerbahçe", MatchDate:"14 March"} ]
 
@@ -41,38 +41,33 @@ export default function Fixture(){
     console.log(data)
     return (
 
-        <div>
+        <div class = 'container'>
             { status==="loading" && <div></div>}
 
             { status==="error" && <div>Error fetching</div>}
         
-            {status === "success" &&
-                    <Stack direction="horizontal" gap={2}>
+            { status === "success" &&
+                    <ul class="cards">
                         {
                                 data.map(element => {
                                     return(
-
-                                        <Card className="bg-light border" style={{height:"60px", width: "5000px"} }>
-                                            {element.HomeTeam}-{element.AwayTeam}
-                                            <br></br>
-                                            {element.MatchDate}
-                                        </Card>
-
+                                        <li class = "card">
+                                            <div>
+                                            <h3 class="card-title">{element.MatchDate}</h3>
+                                            <div class="card-content">
+                                                <p >
+                                                    {element.HomeTeam} - {element.AwayTeam}
+                                                </p>
+                                            </div>
+                                            </div>
+                                        </li>
                                     );
                                 })
-                            
                         }
             
-                    </Stack>
+                    </ul>
             }
         </div>
-        
-        
-
-
-                   
-        
-
     )
 }
 
