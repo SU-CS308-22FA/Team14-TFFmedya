@@ -13,10 +13,12 @@
 
 }
 
+
 .auth-form-container, .login-form, .register-form {
   display: flex;
   flex-direction: column;
 }
+
 
 .container{
   margin: 1rem;

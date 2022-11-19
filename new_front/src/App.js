@@ -17,7 +17,14 @@ import Fixture from './Fixture';
 import Profile from './Profile';
 import PollPage from './Poll_Page';
 import PollCreate from './Poll_Create';
+
+import ForgotPassword from './Forgotpassword';
+import OTPPage from './OTPPage';
+import ChangePassword from './ChangePassword';
+
+
 import { ReactSession } from 'react-client-session';
+
 
 
 const queryClient = new QueryClient()
@@ -41,6 +48,10 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/poll" element={<PollPage />} /> 
             <Route path="/poll_create" element={<PollCreate />} /> 
+            <Route path="/forgotpassword" element={<ForgotPassword />} /> 
+            <Route path="/otppage" element={<OTPPage/>} /> 
+            <Route path="/changepassword" element={<ChangePassword />} />
+
 
 
             

@@ -38,7 +38,7 @@ async function Get_Fixture()
 export default function Fixture(){
 
     const {data, status} = useQuery(["Fixture"], Get_Fixture)
-    console.log(data)
+    //console.log(data)
     return (
 
         <div class = 'container'>
