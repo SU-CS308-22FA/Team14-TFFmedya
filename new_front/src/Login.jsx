@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate  } from 'react-router-dom'
+import { ReactSession } from 'react-client-session'
 //import { UserProvider } from './utils/UserContext'
 
 
@@ -7,6 +8,7 @@ import { Link, useNavigate  } from 'react-router-dom'
 //import { loginUser, setAxiosAuthToken, setToken, getCurrentUser, unsetCurrentUser } from './services/auth';
 
 export default function Login()  {
+
     const [errorMessage, setErrorMessage] = useState('')
     const Navigate = useNavigate()
     
@@ -69,7 +71,14 @@ export default function Login()  {
                 if (data !== "There is no user with this email.") {
                     //Login successful
 
-                    Navigate("/profile", { state: data })
+                    ReactSession.set("username", data.UserName);
+                    ReactSession.set("email", data.Email);
+                    ReactSession.set("firstname", data.FirstName);
+                    ReactSession.set("lastname", data.LastName);
+                    ReactSession.set("is_admin", data.is_admin);
+                    ReactSession.set("is_moderator", data.is_moderator);
+                    ReactSession.set("password", data.Password);
+                    Navigate("/profile")
                 }
                 else {
                    
