@@ -20,10 +20,36 @@ async function Get_Poll()
           .then((data) => {
               console.log(data);
               console.log(data[0].choices[0].option);
-
               // Handle data
           })
+          .catch((err) => {
+          console.log(err.message);
+          })*/
+    return response.json()
 
+}
+
+async function Update_Poll(question)
+{
+    let response = await fetch('https://tffmedya-backend.herokuapp.com/poll/update', {
+      method: 'POST',
+      body: JSON.stringify({
+        // Add parameters here
+        'question_text' : question.question_text,
+        'pub_date' : question.pub_date,
+        'choices' : question.choices,
+      }),
+      headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+      },
+      })
+      /*
+          .then((response) => response.json())
+          .then((data) => {
+              console.log(data);
+              console.log(data[0].choices[0].option);
+              // Handle data
+          })
           .catch((err) => {
           console.log(err.message);
           })*/
@@ -52,7 +78,6 @@ export default function PollPage () {
     
 
     
-
     const handleVote = (voteAnswer,i) => {
         //const {d} = this.state
         console.log("Data???",voteAnswer)
@@ -62,73 +87,59 @@ export default function PollPage () {
           console.log("votes:",answer, answer.votes)
           return answer
         })
+        //console.log("Bu ne",data)
+        Update_Poll(data[i])
+
+
         /*
         this.setState({
-            d: newPollAnswers
-            
+        d: newPollAnswers
+
         })
         console.log(data[0])
         */
-       
+
     }
 
-  
+
     return (
-        <form role="form" onSubmit={handleSubmit}>
-    
-        <div>
-        
-        <button type="submit" id="submit" name="submit" className="btn btn-primary pull-right">Create Poll</button>
-        
+            <form role="form" onSubmit={handleSubmit}>
+
+                <div>
+
+                    <button type="submit" id="submit" name="submit" className="btn btn-primary pull-right">Create Poll</button>
 
 
-        </div>
-      
-        
-        
-        <div>
-            
-            
-            { status==="loading" && <div>Loading data</div>}
-            { status==="error" && <div>Error fetching</div>}
-         
 
-            {
-                status=== "success" &&(
-                    <div>
+                </div>
+
+
+
+                <div>
+
+
+                    { status==="loading" && <div>Loading data</div>}
+                    { status==="error" && <div>Error fetching</div>}
                     {
-                        data.map( (x, i)=>
-                        {
-                            return(
-                            <div className="row mb-3">
-                                
-                            <div class="form-group col-md-4">
-                            
-                            <br></br>
-                                <Poll question={data[i].question_text} answers={data[i].choices} onVote={(b) => handleVote(b,i)}/>
-
-                            </div>
-
-                            
-                            </div>
-                            );
-                        })
+                        status=== "success" &&(
+                                <div>
+                                    {
+                                        data.map( (x, i)=>
+                                        {
+                                            return(
+                                                    <div className="row mb-3">
+                                                        <div class="form-group col-md-4">
+                                                            <br></br>
+                                                            <Poll question={data[i].question_text} answers={data[i].choices} onVote={(b) => handleVote(b,i)}/>
+                                                        </div>
+                                                    </div>
+                                                    );
+                                        })
+                                    }
+                                </div>
+                                )
                     }
-                    </div>
-                )
-            }
-        
-            
-
-        </div>
-        
-        
-        
-        
-        </form>
-        
-
-       
-           
-    )   
+                </div>
+            </form>
+            )
 }
