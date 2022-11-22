@@ -84,7 +84,7 @@ export default function PollCreate () {
         
 
         
-        fetch('http://127.0.0.1:8000/poll/create', {
+        fetch('https://tffmedya-backend.herokuapp.com/poll/create', {
             method: 'POST',
             body: JSON.stringify({
               // Add parameters here
@@ -141,7 +141,7 @@ export default function PollCreate () {
                <div class="form-group col-md-4">
                <label >Add option {i+1}</label>
                <br></br>
-                  <input value = {inputList[i]== "[object Object]" ? '' : inputList[i]} type="text" name="option" class="form-control" placeholder="Option i+1" onChange={ e=>handleinputchange(e,i) }/>
+                  <input value = {inputList[i] === "[object Object]" ? '' : inputList[i]} type="text" name="option" class="form-control" placeholder="Option i+1" onChange={ e=>handleinputchange(e,i) }/>
                   
                   <view style= {{marginLeft: 10}} >
                   {

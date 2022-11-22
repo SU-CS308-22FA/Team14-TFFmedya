@@ -2,9 +2,12 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
+import random
 
 from TFFmedya.models import Team,Player,User
 from TFFmedya.serializers import TeamSerializer,PlayerSerializer,UserSerializer
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 from django.core.files.storage import default_storage
 
@@ -84,6 +87,34 @@ def userRegisterApi(request,id=0):
             User_serializer.save()
             return JsonResponse("Added Successfully",safe=False)
         return JsonResponse("Failed to Add",safe=False)
+
+@csrf_exempt
+def userForgotPasswordApi(request,id=0):
+    if request.method=='POST':
+        User_data=JSONParser().parse(request)
+        eposta = User_data['Email']
+        try:
+            
+            number = random.randint(1000,9999)
+            code = str(number)
+            
+            html_message = render_to_string("Email.html", {"username" :User_data['UserName'] , "code" :code })
+            
+            send_mail('Şifre Yenileme', 'Merhaba ' + User_data['UserName'], 'tffmedyaa@gmail.com', [ eposta], html_message=html_message)
+        except Exception as e:
+            print(str(e))     
+        try:
+            user = User.objects.get(Email=eposta)
+        except Exception as e:
+            print(str(e))   
+         
+        
+            return JsonResponse("There is no user with this email.", safe=False)
+        User_serializer=UserSerializer(user)
+        data = User_serializer.data
+        data["code"] = code
+        return JsonResponse(data,safe=False)   
+            
 
 @csrf_exempt
 def userUpdateApi(request,id=0):

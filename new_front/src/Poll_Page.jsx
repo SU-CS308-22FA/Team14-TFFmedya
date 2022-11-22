@@ -9,7 +9,7 @@ import {useQuery} from "react-query"
 var QQ = "lol"
 async function Get_Poll()
 {
-  let response = await fetch('http://127.0.0.1:8000/poll/index', {
+    let response = await fetch('https://tffmedya-backend.herokuapp.com/poll/index', {
       method: 'POST',
       headers: {
           'Content-type': 'application/json; charset=UTF-8',

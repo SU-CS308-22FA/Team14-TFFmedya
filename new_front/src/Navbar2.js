@@ -12,7 +12,7 @@ export default function Navbar(){
             <CustomLink to="/register">Register</CustomLink>
             <CustomLink to="/profile">Profile</CustomLink>
             <CustomLink to="/poll">Polls</CustomLink>
-            <CustomLink to="/logout">Logout</CustomLink>
+            
             
         
         </ul>

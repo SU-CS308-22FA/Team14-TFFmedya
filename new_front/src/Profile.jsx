@@ -5,18 +5,24 @@ import UserContext from "./utils/UserContext";
 import { useContext } from "react";
 import Login from "./Login";
 import Register from "./Register";
-
+import { ReactSession } from 'react-client-session'
 
 export default function Profile (){
 
-
-    const user_data = useLocation().state;
+    
+    //const user_data = useLocation().state;
     const [Message, setMessage] = useState('');
     //console.log(user_data);
+    /*
     const [pass, setPass] = useState(user_data.Password);
     const [name, setName] = useState(user_data.FirstName);
     const [surname, setSurname] = useState(user_data.LastName);
-    const [username, setUsername] = useState(user_data.UserName);
+    const [username, setUsername] = useState(user_data.UserName);*/
+    const [pass, setPass] = useState(ReactSession.get("password"));
+    const [name, setName] = useState(ReactSession.get("firstname"));
+    const [surname, setSurname] = useState(ReactSession.get("lastname"));
+    const [username, setUsername] = useState(ReactSession.get("username"));
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -34,11 +40,11 @@ export default function Profile (){
         e.preventDefault();
 
 
-        fetch('http://127.0.0.1:8000/userdelete', {
+        fetch('https://tffmedya-backend.herokuapp.com/userdelete', {
             method: 'POST',
             body: JSON.stringify({
                 // Add parameters here
-                'Email' : user_data.Email,
+                'Email' : ReactSession.get("email"),
 
             }),
             headers: {
@@ -51,6 +57,7 @@ export default function Profile (){
                     // Handle data
 
                     if (data === "Deleted Successfully") {
+                        localStorage.clear();
                         window.location.href = "/";
                     }
 
@@ -69,11 +76,11 @@ export default function Profile (){
         e.preventDefault();
 
 
-        fetch('http://127.0.0.1:8000/userupdate', {
+        fetch('https://tffmedya-backend.herokuapp.com/userupdate', {
             method: 'POST',
             body: JSON.stringify({
                 // Add parameters here
-                'Email' : user_data.Email,
+                'Email' : ReactSession.get("email"),
                 'Password' : pass,
                 'FirstName' : name,
                 'LastName' : surname,
@@ -88,6 +95,10 @@ export default function Profile (){
                     console.log(data);
                     // Handle data
                     if (data === "Updated Successfully") {
+                        ReactSession.set("username", username);
+                        ReactSession.set("password", pass);
+                        ReactSession.set("firstname", name);
+                        ReactSession.set("lastname", surname);
                         setMessage("Profil güncellendi.");
                     }
                 })
@@ -102,7 +113,7 @@ export default function Profile (){
 
     return (
 
-
+        ReactSession.get("username") === undefined ? <h>PLEASE LOGIN FIRST</h> :
 
         <div className="auth-form-container">
             <h2>Profiliniz</h2>
