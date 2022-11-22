@@ -31,6 +31,36 @@ async function Get_Poll()
 
 }
 
+async function Update_Poll(question)
+{
+  let response = await fetch('http://127.0.0.1:8000/poll/update', {
+      method: 'POST',
+      body: JSON.stringify({
+        // Add parameters here
+        'question_text' : question.question_text,
+        'pub_date' : question.pub_date,
+        'choices' : question.choices,
+      }),
+      headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+      },
+      })
+      /*
+          .then((response) => response.json())
+          .then((data) => {
+              console.log(data);
+              console.log(data[0].choices[0].option);
+
+              // Handle data
+          })
+
+          .catch((err) => {
+          console.log(err.message);
+          })*/
+    return response.json()
+
+}
+
 
 
 export default function PollPage () {
@@ -52,7 +82,6 @@ export default function PollPage () {
     
 
     
-
     const handleVote = (voteAnswer,i) => {
         //const {d} = this.state
         console.log("Data???",voteAnswer)
@@ -62,6 +91,10 @@ export default function PollPage () {
           console.log("votes:",answer, answer.votes)
           return answer
         })
+        //console.log("Bu ne",data)
+        Update_Poll(data[i])
+
+
         /*
         this.setState({
             d: newPollAnswers
