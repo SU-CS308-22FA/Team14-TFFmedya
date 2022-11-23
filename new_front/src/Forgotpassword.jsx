@@ -31,7 +31,7 @@ export default function ForgotPassword()  {
         //console.log(email );
         //console.log(pass);
 
-        fetch('https://tffmedya-backend.herokuapp.com/userforgotpassword', {
+        fetch('https://tffmedya-backend.herokuapp.com/userforgotpassword', { 
             method: 'POST',
             body: JSON.stringify({
               // Add parameters here

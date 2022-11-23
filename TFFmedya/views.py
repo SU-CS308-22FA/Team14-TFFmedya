@@ -93,23 +93,27 @@ def userForgotPasswordApi(request,id=0):
     if request.method=='POST':
         User_data=JSONParser().parse(request)
         eposta = User_data['Email']
+        user = User.objects.get(Email=eposta)
+        username = user.UserName
         try:
             
             number = random.randint(1000,9999)
             code = str(number)
             
-            html_message = render_to_string("Email.html", {"username" :User_data['UserName'] , "code" :code })
+            html_message = render_to_string("Email.html", {"username" :username , "code" :code })
             
-            send_mail('Şifre Yenileme', 'Merhaba ' + User_data['UserName'], 'tffmedyaa@gmail.com', [ eposta], html_message=html_message)
+            send_mail('Şifre Yenileme', 'Merhaba ' + username, 'tffmedya@hotmail.com', [ eposta], html_message=html_message)
         except Exception as e:
-            print(str(e))     
+            print(str(e))   
+            
+        """
         try:
             user = User.objects.get(Email=eposta)
         except Exception as e:
             print(str(e))   
          
-        
             return JsonResponse("There is no user with this email.", safe=False)
+        """
         User_serializer=UserSerializer(user)
         data = User_serializer.data
         data["code"] = code

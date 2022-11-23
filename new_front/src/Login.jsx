@@ -78,7 +78,7 @@ export default function Login()  {
                     ReactSession.set("is_admin", data.is_admin);
                     ReactSession.set("is_moderator", data.is_moderator);
                     ReactSession.set("password", data.Password);
-                    Navigate("/profile")
+                    window.location.href = "/profile";
                 }
                 else {
                    

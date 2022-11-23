@@ -4,6 +4,8 @@ import {Q} from './Poll_Create'
 import {OPTION_LIST} from './Poll_Create'
 import Poll from 'react-polls';
 import {useQuery} from "react-query"
+import { ReactSession } from 'react-client-session'
+
 
 
 var QQ = "lol"
@@ -103,8 +105,13 @@ export default function PollPage () {
 
 
     return (
+
+            ReactSession.get("username") === undefined ? <h>PLEASE LOGIN FIRST</h> :
+
+
             <form role="form" onSubmit={handleSubmit}>
 
+                { ReactSession.get("is_moderator") === true &&
                 <div>
 
                     <button type="submit" id="submit" name="submit" className="btn btn-primary pull-right">Create Poll</button>
@@ -112,8 +119,9 @@ export default function PollPage () {
 
 
                 </div>
+                }
 
-
+        
 
                 <div>
 
