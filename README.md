@@ -1,3 +1,3 @@
 # Team14-TFFmedya
 
-tfffmedya.herokuapp.com
+tffmedya.herokuapp.com
