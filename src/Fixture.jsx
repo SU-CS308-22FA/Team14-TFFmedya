@@ -10,7 +10,7 @@ const dummyList = [{HomeTeam:"Trabzonspor", AwayTeam:"Fenerbahçe", MatchDate:"1
 
 async function Get_Fixture()
 {
-    let response = await fetch('https://tffmedya-backend.herokuapp.com/fixture/fixtureShow', {
+    let response = await fetch('http://127.0.0.1:8000/fixture/fixtureShow', {
       method: 'POST',
       headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -45,7 +45,7 @@ export default function Fixture(){
             { status==="loading" && <div></div>}
 
             { status==="error" && <div>Error fetching</div>}
-        
+
             { status === "success" &&
                     <ul class="cards">
                         {
@@ -64,7 +64,7 @@ export default function Fixture(){
                                     );
                                 })
                         }
-            
+
                     </ul>
             }
         </div>

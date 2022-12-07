@@ -54,7 +54,7 @@ export default function Login()  {
 
 
 
-        fetch('https://tffmedya-backend.herokuapp.com/userlogin', {
+        fetch('http://127.0.0.1:8000/userlogin', {
             method: 'POST',
             body: JSON.stringify({
               // Add parameters here

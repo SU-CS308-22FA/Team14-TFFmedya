@@ -6,9 +6,9 @@ import validator from 'validator';
 export default function Register (){
     const [errorMessage, setErrorMessage] = useState('')
     const [errorMessage_repeat, setErrorMessage_repeat] = useState('')
- 
+
     const validate = (value) => {
- 
+
     if (validator.isStrongPassword(value, {
       minLength: 8, minLowercase: 1,
       minUppercase: 1, minNumbers: 1, minSymbols: 1
@@ -20,12 +20,12 @@ export default function Register (){
     }
 
     const checkEquality = (value) => {
- 
+
       if (value === pass) {
         setErrorMessage_repeat('')
-        
-      } 
-       
+
+      }
+
       else {
         setErrorMessage_repeat('Şifreler eşleşmiyor')
       }
@@ -43,7 +43,7 @@ export default function Register (){
       e.preventDefault();
 
 
-      fetch('https://tffmedya-backend.herokuapp.com/userregister', {
+      fetch('http://127.0.0.1:8000/userregister', {
           method: 'POST',
           body: JSON.stringify({
             // Add parameters here
@@ -89,18 +89,18 @@ export default function Register (){
             {errorMessage === '' ? null :
             <span style={{
               fontWeight: 'bold',
-              color: errorMessage === 'Şifre uygun' ? 'green' : 'red', 
-              
+              color: errorMessage === 'Şifre uygun' ? 'green' : 'red',
+
             }}>{errorMessage}<br/></span> }
-            
+
             <label htmlFor="password">Şifreyi tekrar giriniz</label>
             <input value={pass_repeat} onChange={(e) => {setPass_repeat(e.target.value); checkEquality(e.target.value) }} type="password" placeholder="********" id="password_repeat" name="password_repeat" required/><br/>
-            
+
             {errorMessage_repeat === '' ? null :
             <span style={{
               fontWeight: 'bold',
-              color: 'red', 
-              
+              color: 'red',
+
             }}>{errorMessage_repeat}<br/></span> }
             <button type="submit" >Kayıt</button>
         </form>

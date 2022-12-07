@@ -44,7 +44,7 @@ export default function ChangePassword (){
       e.preventDefault();
 
 
-      fetch('https://tffmedya-backend.herokuapp.com/userupdate', {
+      fetch('http://127.0.0.1:8000/userupdate', {
           method: 'POST',
           body: JSON.stringify({
             // Add parameters here

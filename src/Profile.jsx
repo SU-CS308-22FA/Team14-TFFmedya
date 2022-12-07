@@ -9,7 +9,7 @@ import { ReactSession } from 'react-client-session'
 
 export default function Profile (){
 
-    
+
     //const user_data = useLocation().state;
     const [Message, setMessage] = useState('');
     //console.log(user_data);
@@ -22,7 +22,7 @@ export default function Profile (){
     const [name, setName] = useState(ReactSession.get("firstname"));
     const [surname, setSurname] = useState(ReactSession.get("lastname"));
     const [username, setUsername] = useState(ReactSession.get("username"));
-    
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -40,7 +40,7 @@ export default function Profile (){
         e.preventDefault();
 
 
-        fetch('https://tffmedya-backend.herokuapp.com/userdelete', {
+        fetch('http://127.0.0.1:8000/userdelete', {
             method: 'POST',
             body: JSON.stringify({
                 // Add parameters here
@@ -76,7 +76,7 @@ export default function Profile (){
         e.preventDefault();
 
 
-        fetch('https://tffmedya-backend.herokuapp.com/userupdate', {
+        fetch('http://127.0.0.1:8000/userupdate', {
             method: 'POST',
             body: JSON.stringify({
                 // Add parameters here
