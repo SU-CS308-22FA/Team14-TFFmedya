@@ -19,7 +19,7 @@ def Index(request):
 
 @csrf_exempt
 def Create(request):
-    
+
     if request.method == 'POST':
         try:
             Question_data = JSONParser().parse(request)
@@ -30,7 +30,7 @@ def Create(request):
             return JsonResponse("Data is not valid.", safe=False)
         except Exception as e:
             return JsonResponse("Fail in Create view. Error: " + str(e), safe=False)
-            
+
 
 @csrf_exempt
 def Update(request):

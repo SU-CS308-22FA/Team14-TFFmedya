@@ -34,6 +34,7 @@ class QuestionSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         tracks_data = validated_data.pop('choices')
         question = Question.objects.create(**validated_data)
+        print(question)
         for track_data in tracks_data:
             Choice.objects.create(question=question, **track_data)
         return question

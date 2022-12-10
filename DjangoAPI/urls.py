@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^',include('TFFmedya.urls')),
     url(r'^poll/', include('Polls.urls')),
-    url(r'^fixture/', include('FixtureRefresh.urls'))
+    url(r'^fixture/', include('FixtureRefresh.urls')),
+    url(r'guessingcontest/', include('GuessingContest.urls'))
 ]
