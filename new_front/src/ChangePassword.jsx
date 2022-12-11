@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import UserContext, { UserConsumer } from "./utils/UserContext";
 import validator from 'validator';
 import {ReactSession} from 'react-client-session'
-
+import {base_url} from "./constants"
 export default function ChangePassword (){
     const [errorMessage, setErrorMessage] = useState('')
     const [errorMessage_repeat, setErrorMessage_repeat] = useState('')
@@ -44,7 +44,7 @@ export default function ChangePassword (){
       e.preventDefault();
 
 
-      fetch('https://tffmedya-backend.herokuapp.com/userupdate', {
+      fetch(base_url +'/userupdate', {
           method: 'POST',
           body: JSON.stringify({
             // Add parameters here

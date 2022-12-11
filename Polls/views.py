@@ -10,11 +10,23 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def Index(request):
     if request.method == 'POST':
-        questions = Question.objects.all()
-        Questions_serializer = QuestionSerializer(questions, many=True)
         try:
-            return JsonResponse(Questions_serializer.data, safe=False)
+            questions = Question.objects.all()
+        except Exception as e:
+            return JsonResponse("Could not get objects.", safe=False)
+        try:
+            Questions_serializer = QuestionSerializer(questions, many=True)
+        except Exception as e:
+            return JsonResponse("Could not serialize.", safe=False)
+        try:
+            
+            data = Questions_serializer.data
+            print("loll",data[0]["isActive"])
+            data = [k for k in data if k['isActive'] == True]
+            print(data)
+            return JsonResponse(data, safe=False)
         except:
+            print("Could not return the objects")
             return JsonResponse("Could not return the objects.", safe=False)
 
 @csrf_exempt

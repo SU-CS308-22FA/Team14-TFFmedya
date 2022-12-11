@@ -6,7 +6,7 @@ import { useContext } from "react";
 import Login from "./Login";
 import Register from "./Register";
 import { ReactSession } from 'react-client-session'
-
+import {base_url} from "./constants"
 export default function Profile (){
 
     
@@ -40,7 +40,7 @@ export default function Profile (){
         e.preventDefault();
 
 
-        fetch('https://tffmedya-backend.herokuapp.com/userdelete', {
+        fetch(base_url +'/userdelete', {
             method: 'POST',
             body: JSON.stringify({
                 // Add parameters here
@@ -76,7 +76,7 @@ export default function Profile (){
         e.preventDefault();
 
 
-        fetch('https://tffmedya-backend.herokuapp.com/userupdate', {
+        fetch(base_url+'/userupdate', {
             method: 'POST',
             body: JSON.stringify({
                 // Add parameters here

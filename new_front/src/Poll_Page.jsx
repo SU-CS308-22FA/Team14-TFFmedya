@@ -5,13 +5,15 @@ import {OPTION_LIST} from './Poll_Create'
 import Poll from 'react-polls';
 import {useQuery} from "react-query"
 import { ReactSession } from 'react-client-session'
-
+import {base_url} from "./constants"
 
 
 var QQ = "lol"
 async function Get_Poll()
 {
-    let response = await fetch('https://tffmedya-backend.herokuapp.com/poll/index', {
+    console.log(base_url+ "/poll/index")
+    let response = await fetch(base_url +'/poll/index', {
+
       method: 'POST',
       headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -33,12 +35,13 @@ async function Get_Poll()
 
 async function Update_Poll(question)
 {
-    let response = await fetch('https://tffmedya-backend.herokuapp.com/poll/update', {
+    let response = await fetch(base_url +'/poll/update', {
       method: 'POST',
       body: JSON.stringify({
         // Add parameters here
         'question_text' : question.question_text,
         'pub_date' : question.pub_date,
+        'isActive' : question.isActive,
         'choices' : question.choices,
       }),
       headers: {
@@ -78,7 +81,12 @@ export default function PollPage () {
 
     //var data = Get_Poll();
     
+    const handleEnd = (e,i) => {
+        e.preventDefault();
+        data[i].isActive = false
+        Update_Poll(data[i])
 
+    }
     
     const handleVote = (voteAnswer,i) => {
         //const {d} = this.state
@@ -139,6 +147,7 @@ export default function PollPage () {
                                                         <div class="form-group col-md-4">
                                                             <br></br>
                                                             <Poll question={data[i].question_text} answers={data[i].choices} onVote={(b) => handleVote(b,i)}/>
+                                                            {ReactSession.get("is_moderator") === true&&<button onClick={e => handleEnd(e,i)}>End Poll</button>}
                                                         </div>
                                                     </div>
                                                     );

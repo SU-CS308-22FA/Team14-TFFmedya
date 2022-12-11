@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import {Link} from "react-router-dom";
 import UserContext, { UserConsumer } from "./utils/UserContext";
 import validator from 'validator';
+import {base_url} from "./constants"
 
 export default function Register (){
     const [errorMessage, setErrorMessage] = useState('')
@@ -43,7 +44,7 @@ export default function Register (){
       e.preventDefault();
 
 
-      fetch('https://tffmedya-backend.herokuapp.com/userregister', {
+      fetch(base_url+'/userregister', {
           method: 'POST',
           body: JSON.stringify({
             // Add parameters here

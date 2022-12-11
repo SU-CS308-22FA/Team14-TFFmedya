@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate  } from 'react-router-dom'
 import {ReactSession} from 'react-client-session'
-
+import {base_url} from "./constants"
 //import { UserProvider } from './utils/UserContext'
 
 
@@ -31,7 +31,7 @@ export default function ForgotPassword()  {
         //console.log(email );
         //console.log(pass);
 
-        fetch('https://tffmedya-backend.herokuapp.com/userforgotpassword', { 
+        fetch(base_url+'/userforgotpassword', { 
             method: 'POST',
             body: JSON.stringify({
               // Add parameters here

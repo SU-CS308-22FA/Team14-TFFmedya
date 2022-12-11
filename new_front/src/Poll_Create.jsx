@@ -4,7 +4,7 @@ import { LeafPoll, Result } from 'react-leaf-polls'
 import 'react-leaf-polls/dist/index.css'
 import Poll from 'react-polls';
 import { Container } from "react-bootstrap";
-
+import {base_url} from "./constants"
 export var Q = "";
 export var OPTION_LIST = [];
 
@@ -84,7 +84,7 @@ export default function PollCreate () {
         
 
         
-        fetch('https://tffmedya-backend.herokuapp.com/poll/create', {
+        fetch(base_url+'/poll/create', {
             method: 'POST',
             body: JSON.stringify({
               // Add parameters here
@@ -120,7 +120,7 @@ export default function PollCreate () {
     
     return (
 
-<div style={{ display: 'block',                   width: 700, padding: 30 }}>
+    <div style={{ display: 'block',width: 700, padding: 30 }}>
 
     <Container fluid>
     <form role="form" onSubmit={handleSubmit}>

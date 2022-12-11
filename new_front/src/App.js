@@ -18,7 +18,7 @@ import Fixture from './Fixture';
 import Profile from './Profile';
 import PollPage from './Poll_Page';
 import PollCreate from './Poll_Create';
-
+import Review from './ReviewPage';
 import ForgotPassword from './Forgotpassword';
 import OTPPage from './OTPPage';
 import ChangePassword from './ChangePassword';
@@ -55,13 +55,10 @@ function App() {
             <Route path="/otppage" element={<OTPPage/>} /> 
             <Route path="/changepassword" element={<ChangePassword />} />
             <Route path="/logout" element={<Logout />} />
-
-
-
+            <Route path="/matchreview" element={<Review />} />
             
           </Routes>
           
-
         </div>  
       </QueryClientProvider>
       </>

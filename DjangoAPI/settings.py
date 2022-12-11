@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'Polls',
     'FixtureRefresh',
+    'Evaluations'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
