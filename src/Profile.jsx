@@ -6,10 +6,10 @@ import { useContext } from "react";
 import Login from "./Login";
 import Register from "./Register";
 import { ReactSession } from 'react-client-session'
-
+import {base_url} from "./constants"
 export default function Profile (){
 
-
+    
     //const user_data = useLocation().state;
     const [Message, setMessage] = useState('');
     //console.log(user_data);
@@ -22,7 +22,7 @@ export default function Profile (){
     const [name, setName] = useState(ReactSession.get("firstname"));
     const [surname, setSurname] = useState(ReactSession.get("lastname"));
     const [username, setUsername] = useState(ReactSession.get("username"));
-
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -40,7 +40,7 @@ export default function Profile (){
         e.preventDefault();
 
 
-        fetch('http://127.0.0.1:8000/userdelete', {
+        fetch(base_url +'/userdelete', {
             method: 'POST',
             body: JSON.stringify({
                 // Add parameters here
@@ -76,7 +76,7 @@ export default function Profile (){
         e.preventDefault();
 
 
-        fetch('http://127.0.0.1:8000/userupdate', {
+        fetch(base_url+'/userupdate', {
             method: 'POST',
             body: JSON.stringify({
                 // Add parameters here

@@ -6,7 +6,7 @@ import { ReactSession } from 'react-client-session'
 
 //import { UserContext } from './utils/UserContext'
 //import { loginUser, setAxiosAuthToken, setToken, getCurrentUser, unsetCurrentUser } from './services/auth';
-
+import {base_url} from "./constants"
 export default function Login()  {
 
     const [errorMessage, setErrorMessage] = useState('')
@@ -54,7 +54,7 @@ export default function Login()  {
 
 
 
-        fetch('http://127.0.0.1:8000/userlogin', {
+        fetch(base_url+'/userlogin', {
             method: 'POST',
             body: JSON.stringify({
               // Add parameters here

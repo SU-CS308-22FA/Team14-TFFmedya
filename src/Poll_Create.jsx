@@ -4,7 +4,7 @@ import { LeafPoll, Result } from 'react-leaf-polls'
 import 'react-leaf-polls/dist/index.css'
 import Poll from 'react-polls';
 import { Container } from "react-bootstrap";
-
+import {base_url} from "./constants"
 export var Q = "";
 export var OPTION_LIST = [];
 
@@ -21,7 +21,7 @@ export default function PollCreate () {
       { option: 'Yes', votes: 6 },
       { option: 'No', votes: 2 }
     ]
-
+    
     /*
     const handleVote = voteAnswer => {
         const { pollAnswers } = this.state
@@ -35,16 +35,16 @@ export default function PollCreate () {
     }*/
 
       const [inputList, setinputList]= useState([{ option:''}]);
-
+    
       const handleinputchange=(e, index)=>{
         console.log("QQ:", question);
         const {value}= e.target;
         const list= [...inputList];
         list[index]= value;
         setinputList(list);
-
+    
       }
-
+     
       const handleremove= (e,index)=>{
         e.preventDefault();
         const list=[...inputList];
@@ -52,16 +52,16 @@ export default function PollCreate () {
         list.splice(index,1);
         console.log("Handleremove: ", list)
         setinputList(list);
-
+        
       }
-
-      const handleaddclick=(e)=>{
+    
+      const handleaddclick=(e)=>{ 
         console.log(inputList);
         setinputList([...inputList, e.target.value]);
         console.log("List:", inputList);
       }
 
-
+    
     const handleSubmit = (e) => {
 
         e.preventDefault();
@@ -81,17 +81,17 @@ export default function PollCreate () {
         //console.log(email );
         //console.log(pass);
 
+        
 
-
-
-        fetch('http://127.0.0.1:8000/poll/create', {
+        
+        fetch(base_url+'/poll/create', {
             method: 'POST',
             body: JSON.stringify({
               // Add parameters here
               'question_text' : question,
               'pub_date' : '2022-11-14',
               'choices' : choices
-
+              
             }),
             headers: {
               'Content-type': 'application/json; charset=UTF-8',
@@ -105,7 +105,7 @@ export default function PollCreate () {
                     Navigate("/poll", { state: data })
                 }
                 else {
-
+                   
                     setErrorMessage("Could not create the poll")
 
                 }
@@ -117,32 +117,32 @@ export default function PollCreate () {
 
     }
 
-
+    
     return (
 
-<div style={{ display: 'block',                   width: 700, padding: 30 }}>
+    <div style={{ display: 'block',width: 700, padding: 30 }}>
 
     <Container fluid>
     <form role="form" onSubmit={handleSubmit}>
 
      <div className="row">
-       <div className="col-sm-12">
+       <div className="col-sm-12">   
           <div class="form-group col-md-4">
             <label >Enter your poll question</label>
             <br></br>
             <input type="text"  name="firstName" class="form-control" value={question} placeholder="Poll question" onChange={e => setQuestion(e.target.value)} />
           </div>
 
-            {
+            { 
             inputList.map( (x,i)=>{
               return(
               <div className="row mb-3">
-
+                 
                <div class="form-group col-md-4">
                <label >Add option {i+1}</label>
                <br></br>
                   <input value = {inputList[i] === "[object Object]" ? '' : inputList[i]} type="text" name="option" class="form-control" placeholder="Option i+1" onChange={ e=>handleinputchange(e,i) }/>
-
+                  
                   <view style= {{marginLeft: 10}} >
                   {
                   inputList.length!==1 &&
@@ -158,12 +158,12 @@ export default function PollCreate () {
 
                </div>
 
-
+             
             </div>
               );
-             } )}
+             } )} 
 
-
+               
        </div>
      </div>
      <button type="submit" id="submit" name="submit" className="btn btn-primary pull-right">Add Post</button>
@@ -172,18 +172,18 @@ export default function PollCreate () {
     </div>
         /*
         //<div className="col-md-5">
-          //<div className="form-area">
+          //<div className="form-area">  
               <form role="form" onSubmit={handleSubmit}>
               <br styles="clear:both" />
                 <div className="form">
                   <h2>Create polls</h2>
                   <input type="text" className="form-control" id="title" name="title" placeholder="Title" required />
                 </div>
-
+                            
                 <div className="form">
                 <input type="text" className="form-control" id="question" name="question" placeholder="Your poll question" required />
                 </div>
-
+                   
               <button type="submit" id="submit" name="submit" className="btn btn-primary pull-right">Add Post</button>
               </form>
 
@@ -193,13 +193,13 @@ export default function PollCreate () {
         <Poll question={pollQuestion} answers={pollAnswers} onVote={handleVote} />
         </div>*/
 
-
-
-
-
-
-
-
-
-    )
+ 
+        
+       
+    
+           
+         
+       
+           
+    )   
 }
