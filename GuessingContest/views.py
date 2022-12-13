@@ -70,8 +70,11 @@ def voteUpdate(request):
 def Leaderboard(request):
     if request.method == 'POST':
         try:
+            print(3)
             users = User.objects.all()
+            print(4)
             dictt = [{'username' : x.UserName, 'point' : x.Point} for x in users]
+            print(5)
             return JsonResponse(dictt, safe=False)
         except Exception as e:
             return JsonResponse("Failed", safe=False)
