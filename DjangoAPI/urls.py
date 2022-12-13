@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^',include('TFFmedya.urls')),
     url(r'^poll/', include('Polls.urls')),
     url(r'^fixture/', include('FixtureRefresh.urls')),
-    url(r'^matchreview/', include('Evaluations.urls'))
+    url(r'^matchreview/', include('Evaluations.urls')),
+    url(r'guessingcontest/', include('GuessingContest.urls'))
 ]

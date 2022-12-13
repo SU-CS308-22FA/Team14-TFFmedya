@@ -119,3 +119,39 @@ def Results(request):
             return JsonResponse('Failed Getting the Question. The error message is: ' + str(e), safe=False)
         Question_serializer = QuestionSerializer(question)
         return JsonResponse(Question_serializer, safe=False)
+
+@csrf_exempt
+def EndPoll(request):
+    if request.method == 'POST':
+        data = JSONParser().parse(request)
+        print(3)
+        try:
+            print(4)
+            Question.objects.filter(question_text = data['question_text']).update(isActive = False)
+            print(5)
+            return JsonResponse('Successful', safe=False)
+        except:
+            return JsonResponse('Failed', safe=False)
+
+@csrf_exempt
+def ShowResult(request):
+    if request.method == 'POST':
+        data = JSONParser().parse(request)
+        try:
+            print(3)
+            temp1 = []
+            temp2 = []
+            print(4)
+            question = Question.objects.get(question_text = data['question_text'])
+            print(5)
+            votes = Vote.objects.all()
+            print(6)
+            for i in votes:
+                if i.question == question:
+                    temp1.append(i.user.UserName)
+                    temp2.append(i.choice.option)
+            print(7)
+            dictt = [{'username' : temp1[x], 'option' : temp2[x]} for x in range(len(temp1))]
+            return JsonResponse(dictt, safe=False)
+        except:
+            return JsonResponse('Failed', safe=False)

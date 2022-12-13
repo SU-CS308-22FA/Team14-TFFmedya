@@ -6,5 +6,7 @@ urlpatterns = [
     url(r'^index$', views.Index),
     url(r'^create$', views.Create),
     url(r'^update$', views.CreateOrUpdateVote),
-    url(r'^results$', views.Results)
+    url(r'^results$', views.Results),
+    url(r'^endpoll$', views.EndPoll),
+    url(r'^showresult$', views.ShowResult)
 ]
