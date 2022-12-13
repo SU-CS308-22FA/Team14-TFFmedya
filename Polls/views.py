@@ -67,23 +67,32 @@ def CreateOrUpdateVote(request):
         choice = Choice.objects.get(question = question, option = Vote_data["choice"])
         try:
             vote = Vote.objects.get(user=user, question = question)
+            # User has voted for this question
 
-            # User has voted for this question, update
-            print("Getledim")
-            # Update old Choice, decrease votecount by 1
+
+            # Update if new option is different
+            
             oldChoice = vote.choice
-            oldChoice.votes -= 1
-            oldChoice.save()
+            if(oldChoice.option != choice.option): 
+                # Update old Choice, decrease votecount by 1
+                #oldChoice = vote.choice
+                oldChoice.votes -= 1
+                oldChoice.save()
 
-            # Update new choice, increase votecount by 1
-            choice.votes += 1
-            choice.save()
+                # Update new choice, increase votecount by 1
+                choice.votes += 1
+                choice.save()
 
-            # Update vote table
-            vote.choice = choice
-            vote.save()
+                # Update vote table
+                vote.choice = choice
+                vote.save()
+                return JsonResponse("Vote Updated Successfully", safe=False)
 
-            return JsonResponse("Vote Updated Successfully", safe=False)
+            else:
+                return JsonResponse("You already voted for this option", safe=False)
+
+
+            
         except Vote.DoesNotExist:
             # User has not voted for this question, create
             print("DNE Verdim")
