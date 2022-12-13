@@ -75,8 +75,6 @@ async function Update_Poll(question, voteAnswer)
 
 }
 
-
-
 export default function PollPage () {
     const [selected_choice, setSelectedChoice] = useState('')
     const {data, status} = useQuery(["Questions"], Get_Poll)
