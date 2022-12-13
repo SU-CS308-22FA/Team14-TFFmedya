@@ -1,14 +1,13 @@
 //import Navbar from "./Navbar"
 import { Link, useNavigate  } from 'react-router-dom'
-import {Q} from './Poll_Create'
-import {OPTION_LIST} from './Poll_Create'
+import {Q} from './Contest_Create'
+import {OPTION_LIST} from './Contest_Create'
 import Poll from 'react-polls';
 import {useQuery} from "react-query"
 import { ReactSession } from 'react-client-session'
 import {base_url} from "./constants"
 //import PollCard from './PollCard';
 import React, {useState} from "react";
-
 import {
   MDBBtn,
   MDBCard,
@@ -23,10 +22,10 @@ import {
 
 
 
-async function Get_Poll()
+async function Get_Contest()
 {
-    console.log(base_url+ "/poll/index")
-    let response = await fetch(base_url +'/poll/index', {
+    console.log(base_url+ "/guessingcontest/guesscontestshow")
+    let response = await fetch(base_url +'/guessingcontest/guesscontestshow', {
 
       method: 'POST',
       headers: {
@@ -43,21 +42,20 @@ async function Get_Poll()
           .catch((err) => {
           console.log(err.message);
           })*/
-    console.log(response.json)
     return response.json()
 
 }
 
-async function Update_Poll(question, voteAnswer)
+async function Update_Contest(question, guessAnswer)
 {
     console.log("Question is:",question)
-    await fetch(base_url +'/poll/update', {
+    await fetch(base_url +'/guessingcontest/voteUpdate', {
       method: 'POST',
       body: JSON.stringify({
         // Add parameters here
         'question' : question.question_text,
         'username' : ReactSession.get("username"),
-        'choice' : voteAnswer,
+        'choice' : guessAnswer,
       }),
       headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -77,11 +75,9 @@ async function Update_Poll(question, voteAnswer)
 
 }
 
-export default function PollPage () {
- 
-    
+export default function GuessingContestPage () {
     const [selected_choice, setSelectedChoice] = useState('')
-    const {data, status} = useQuery(["Questions"], Get_Poll)
+    const {data, status} = useQuery(["Questions"], Get_Contest)
     //var data = Get_Poll();
     console.log("Line 39: ", typeof(data))
 
@@ -90,10 +86,10 @@ export default function PollPage () {
     const handleSubmit = (e) => {
 
         e.preventDefault();
-        Navigate("/poll_create");
+        Navigate("/contest_create");
     }
 
-    function PollCard(question) {
+    function ContestCard(question) {
 
         const handleChange = (event) => {
           event.preventDefault();
@@ -142,7 +138,7 @@ export default function PollPage () {
                   {
                   <MDBCardFooter>
                     <div className="text-end">
-                      <button onClick={selected_choice !== "" ? (e) =>  handleVote(e,selected_choice,question) : undefined}>Submit</button>
+                      <button onClick={selected_choice !== "" ? (e) =>  handleGuess(e,selected_choice,question) : undefined}>Submit</button>
                     </div>
                   </MDBCardFooter>
                     }
@@ -162,12 +158,12 @@ export default function PollPage () {
 
     }
     
-    const handleVote = (e,voteAnswer,question) => {
+    const handleGuess = (e,guessAnswer,question) => {
         e.preventDefault();
-        console.log("Data???",voteAnswer)
+        console.log("Data???",guessAnswer)
         //console.log("i:", i)
         //console.log("data[i]:", data[i])
-        Update_Poll(question, voteAnswer)
+        Update_Contest(question, guessAnswer)
 
     }
 
@@ -198,10 +194,9 @@ export default function PollPage () {
                     { status==="error" && <div>Error fetching</div>}
                     {
                         status=== "success" &&(
-
                                 <div>
-                                  <br/>
-                                 <h1 className='leaderboard'>Polls</h1>
+                                    <br/>
+                                    <h1 className='leaderboard'>Contests</h1>
                                     {
                                         data.map( (x, i)=>
                                         {
@@ -212,7 +207,7 @@ export default function PollPage () {
                                                     <div className="row mb-3">
                                                         <div class="form-group col-md-4">
                                                             <br></br>
-                                                            {PollCard(data[i])}
+                                                            {ContestCard(data[i])}
                                                             {/*<button onClick={handleVote(selected_choice,i)}>Submit Answer</button>*/}
                                                             {ReactSession.get("is_moderator") === true&&<button onClick={e => handleEnd(e,i)}>End Poll</button>}
                                                         </div>

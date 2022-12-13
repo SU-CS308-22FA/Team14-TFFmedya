@@ -8,11 +8,12 @@ export default function Navbar(){
     <nav className="nav">
         
         <ul> 
-            <CustomLink to="/login">Login</CustomLink>
-            <CustomLink to="/register">Register</CustomLink>
             <CustomLink to="/profile">Profile</CustomLink>
             <CustomLink to="/poll">Polls</CustomLink>
+            <CustomLink to="/contest">Contests</CustomLink>
+            <CustomLink to="/leaderboard">Leaderboard</CustomLink>
             <CustomLink to="/logout">Logout</CustomLink>
+            
             
         
         </ul>

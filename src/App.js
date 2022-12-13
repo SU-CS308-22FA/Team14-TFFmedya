@@ -26,6 +26,9 @@ import ChangePassword from './ChangePassword';
 
 import { ReactSession } from 'react-client-session';
 import Logout from './Logout';
+import GuessingContestPage from './GuessingContest';
+import ContestCreate from './Contest_Create';
+import Board from './Leaderboard';
 
 
 
@@ -51,11 +54,14 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/poll" element={<PollPage />} /> 
             <Route path="/poll_create" element={<PollCreate />} /> 
+            <Route path="/contest" element={<GuessingContestPage />} /> 
+            <Route path="/contest_create" element={<ContestCreate />} /> 
             <Route path="/forgotpassword" element={<ForgotPassword />} /> 
             <Route path="/otppage" element={<OTPPage/>} /> 
             <Route path="/changepassword" element={<ChangePassword />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/matchreview" element={<Review />} />
+            <Route path="/leaderboard" element={<Board />} />
             
           </Routes>
           
