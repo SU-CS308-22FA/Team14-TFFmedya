@@ -1,6 +1,5 @@
 # Team14-TFFmedya-Test
 
-![This is an image](/src/images/siperlik3.png)
 # **TFFMedya**
 
 <table>
