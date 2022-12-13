@@ -84,7 +84,7 @@ export default function ContestCreate () {
         
 
         
-        fetch(base_url+'/poll/create', {
+        fetch(base_url+'/guessingcontest/guesscontestcreate', {
             method: 'POST',
             body: JSON.stringify({
               // Add parameters here
@@ -100,13 +100,13 @@ export default function ContestCreate () {
              .then((response) => response.json())
              .then((data) => {
                 console.log(data);
-                if (data === "Question Added Successfully") {
+                if (data === "Successful") {
 
-                    Navigate("/poll", { state: data })
+                    Navigate("/contest", { state: data })
                 }
                 else {
                    
-                    setErrorMessage("Could not create the poll")
+                    setErrorMessage("Could not create the contest")
 
                 }
 
@@ -128,7 +128,7 @@ export default function ContestCreate () {
      <div className="row">
        <div className="col-sm-12">   
           <div class="form-group col-md-4">
-            <label >Enter your poll question</label>
+            <label >Enter your contest question</label>
             <br></br>
             <input type="text"  name="firstName" class="form-control" value={question} placeholder="Poll question" onChange={e => setQuestion(e.target.value)} />
           </div>

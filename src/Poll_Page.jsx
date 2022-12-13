@@ -8,7 +8,6 @@ import { ReactSession } from 'react-client-session'
 import {base_url} from "./constants"
 //import PollCard from './PollCard';
 import React, {useState} from "react";
-
 import {
   MDBBtn,
   MDBCard,
@@ -43,7 +42,6 @@ async function Get_Poll()
           .catch((err) => {
           console.log(err.message);
           })*/
-    console.log(response.json)
     return response.json()
 
 }
@@ -78,8 +76,6 @@ async function Update_Poll(question, voteAnswer)
 }
 
 export default function PollPage () {
- 
-    
     const [selected_choice, setSelectedChoice] = useState('')
     const {data, status} = useQuery(["Questions"], Get_Poll)
     //var data = Get_Poll();
@@ -104,7 +100,7 @@ export default function PollPage () {
           <MDBContainer>
             <MDBRow className="justify-content-center">
               <MDBCol size="6">
-                <MDBCard>
+                <MDBCard style={{color : "green", backgroundColor : "orange"}}>
                   <MDBCardBody>
                     <div className="text-center">
                       <MDBIcon far icon="file-alt mb-3 text-primary" size="4x" />
@@ -198,10 +194,7 @@ export default function PollPage () {
                     { status==="error" && <div>Error fetching</div>}
                     {
                         status=== "success" &&(
-
                                 <div>
-                                  <br/>
-                                 <h1 className='leaderboard'>Polls</h1>
                                     {
                                         data.map( (x, i)=>
                                         {

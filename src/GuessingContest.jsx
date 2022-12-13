@@ -100,7 +100,7 @@ export default function GuessingContestPage () {
           <MDBContainer>
             <MDBRow className="justify-content-center">
               <MDBCol size="6">
-                <MDBCard>
+                <MDBCard style={{color : "green", backgroundColor : "orange"}}>
                   <MDBCardBody>
                     <div className="text-center">
                       <MDBIcon far icon="file-alt mb-3 text-primary" size="4x" />
@@ -178,7 +178,7 @@ export default function GuessingContestPage () {
                 { ReactSession.get("is_moderator") === true &&
                 <div>
 
-                    <button type="submit" id="submit" name="submit" className="btn btn-primary pull-right">Create Poll</button>
+                    <button type="submit" id="submit" name="submit" className="btn btn-primary pull-right">Create Contest</button>
 
 
 
@@ -209,7 +209,7 @@ export default function GuessingContestPage () {
                                                             <br></br>
                                                             {ContestCard(data[i])}
                                                             {/*<button onClick={handleVote(selected_choice,i)}>Submit Answer</button>*/}
-                                                            {ReactSession.get("is_moderator") === true&&<button onClick={e => handleEnd(e,i)}>End Poll</button>}
+                                                            {/*ReactSession.get("is_moderator") === true&&<button onClick={e => handleEnd(e,i)}>End Poll</button>*/}
                                                         </div>
                                                     </div>
                                                     // <div className="row mb-3">

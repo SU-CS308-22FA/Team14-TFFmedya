@@ -87,6 +87,8 @@ export default function Review () {
     return (
         <div>
         <h2>Review</h2>
+        <h3>{match}</h3>
+        <h4>{match_date}</h4>
         <label >Share your comments on this match</label>
         <br></br>
         <input type="text"  name="firstName" class="form-control" value={comment} placeholder="Comment" onChange={e => setComment(e.target.value)} />
