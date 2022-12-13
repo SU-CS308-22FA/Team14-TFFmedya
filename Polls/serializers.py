@@ -13,7 +13,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=Question
-        fields=['question_text','pub_date', 'choices']
+        fields=['question_text','pub_date', 'isActive', 'choices']
 
     def update(self, instance, validated_data):
         choices_data = validated_data.pop('choices')
@@ -21,6 +21,7 @@ class QuestionSerializer(serializers.ModelSerializer):
         choices = list(choices)
         instance.question_text = validated_data.get('question_text', instance.question_text)
         instance.pub_date = validated_data.get('pub_date', instance.pub_date)
+        instance.isActive = validated_data.get('isActive', instance.pub_date)
         #instance.choices = validated_data.get('instrument', instance.instrument)
         instance.save()
 
@@ -31,6 +32,7 @@ class QuestionSerializer(serializers.ModelSerializer):
             #album.num_stars = album_data.get('num_stars', album.num_stars)
             album.save()
         return instance
+    
     def create(self, validated_data):
         tracks_data = validated_data.pop('choices')
         question = Question.objects.create(**validated_data)

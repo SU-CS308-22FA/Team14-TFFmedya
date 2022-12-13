@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Question, Choice
+from .models import Question, Choice, Vote
+from TFFmedya.models import User
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser
 from .serializers import QuestionSerializer
@@ -10,11 +11,23 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def Index(request):
     if request.method == 'POST':
-        questions = Question.objects.all()
-        Questions_serializer = QuestionSerializer(questions, many=True)
         try:
-            return JsonResponse(Questions_serializer.data, safe=False)
+            questions = Question.objects.all()
+        except Exception as e:
+            return JsonResponse("Could not get objects.", safe=False)
+        try:
+            Questions_serializer = QuestionSerializer(questions, many=True)
+        except Exception as e:
+            return JsonResponse("Could not serialize.", safe=False)
+        try:
+            
+            data = Questions_serializer.data
+            
+            data = [k for k in data if k['isActive'] == True]
+            
+            return JsonResponse(data, safe=False)
         except:
+            print("Could not return the objects")
             return JsonResponse("Could not return the objects.", safe=False)
 
 @csrf_exempt
@@ -31,7 +44,7 @@ def Create(request):
         except Exception as e:
             return JsonResponse("Fail in Create view. Error: " + str(e), safe=False)
             
-
+"""
 @csrf_exempt
 def Update(request):
     if request.method == 'POST':
@@ -42,6 +55,50 @@ def Update(request):
             Question_serializer.save()
             return JsonResponse("Question Updated Successfully", safe=False)
         return JsonResponse("Failed Updating the Question", safe=False)
+"""
+
+@csrf_exempt
+def CreateOrUpdateVote(request):
+    # The data we need: {username, question, choice}
+    if request.method == "POST":
+        Vote_data = JSONParser().parse(request)
+        question = Question.objects.get(question_text = Vote_data["question"])
+        user = User.objects.get(UserName = Vote_data["username"])
+        choice = Choice.objects.get(question = question, option = Vote_data["choice"])
+        try:
+            vote = Vote.objects.get(user=user, question = question)
+
+            # User has voted for this question, update
+            print("Getledim")
+            # Update old Choice, decrease votecount by 1
+            oldChoice = vote.choice
+            oldChoice.votes -= 1
+            oldChoice.save()
+
+            # Update new choice, increase votecount by 1
+            choice.votes += 1
+            choice.save()
+
+            # Update vote table
+            vote.choice = choice
+            vote.save()
+
+            return JsonResponse("Vote Updated Successfully", safe=False)
+        except Vote.DoesNotExist:
+            # User has not voted for this question, create
+            print("DNE Verdim")
+            Vote.objects.create(user=user, question = question, choice = choice)
+
+            # Update new choice, increase votecount by 1
+            choice.votes += 1
+            choice.save()
+
+            return JsonResponse("Vote Created Successfully", safe=False)
+        except Exception as e:
+            print("Failed Getting the Vote: " + str(e))
+            return JsonResponse("Failed Getting the Vote", safe=False)
+           
+
 
 @csrf_exempt
 def Results(request):

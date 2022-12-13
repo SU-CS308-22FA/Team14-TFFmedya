@@ -1,10 +1,12 @@
 from django.db import models
+from TFFmedya.models import User
 
 # Create your models here.
 
 class Question(models.Model):
-    question_text = models.CharField(max_length=250)
+    question_text = models.CharField(max_length=250, unique=True)
     pub_date = models.DateField('date published')
+    isActive = models.BooleanField(default = True)
 
     def __str__(self):
         return self.question_text
@@ -22,3 +24,14 @@ class Choice(models.Model):
     def __str__(self):
         return self.option
 
+
+class Vote(models.Model):
+    question = models.ForeignKey(Question, related_name="question_votes", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="user_votes",on_delete=models.CASCADE)
+    choice = models.ForeignKey(Choice, related_name="choice_votes", on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ['user', 'choice', 'question']
+
+    def __str__(self):
+        return self.user.username + self.choice.option

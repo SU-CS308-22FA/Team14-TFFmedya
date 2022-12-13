@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import os
+import django_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-hcynggq50bze-*5-j(4u!3+(fde1lz^8dteu+v4pd5n_cm1_ex
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'tffmedya-backend.herokuapp.com', 'tffmedya.eba-m5nmguza.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['*', 'tffmedya-backend.herokuapp.com']
 
 
 # Application definition
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'Polls',
     'FixtureRefresh',
+    'Evaluations'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -133,9 +135,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 
+django_heroku.settings(locals())
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
