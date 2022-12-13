@@ -16,4 +16,4 @@ class PlayerSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model=User
-        fields=('UserId', 'Email', 'UserName', 'FirstName', 'LastName', 'Password', 'is_moderator', 'is_admin')
+        fields=('UserId', 'Email', 'UserName', 'FirstName', 'LastName', 'Password', 'is_moderator', 'is_admin', 'Point')

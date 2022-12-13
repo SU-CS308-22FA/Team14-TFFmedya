@@ -23,3 +23,4 @@ class User(models.Model):
     Password = models.CharField(max_length=100)
     is_moderator = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
+    Point = models.IntegerField(default=0)

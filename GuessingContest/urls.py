@@ -6,6 +6,7 @@ from django.conf import settings
 
 urlpatterns=[
     url(r'^guesscontestcreate$',views.guessingContestCreate),
-    url(r'^vote$',views.vote),
-    url(r'^guesscontestshow$',views.guessingContestShow)
+    url(r'^guesscontestshow$',views.guessingContestShow),
+    url(r'^voteUpdate$',views.voteUpdate),
+    url(r'^leaderboard$',views.Leaderboard)
 ]
