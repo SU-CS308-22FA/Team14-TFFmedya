@@ -20,7 +20,32 @@ import {
   MDBRow,
 } from "mdb-react-ui-kit";
 
+async function End_Poll(question)
+{
+    
+    await fetch(base_url +'/poll/endpoll', {
+      method: 'POST',
+      body: JSON.stringify({
+        // Add parameters here
+        'question' : question.question_text,
+      }),
+      headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+      },
+      })
+      
+          .then((response) => response.json())
+          .then((data) => {
+              console.log(data);
+              
+              // Handle data
+          })
+          .catch((err) => {
+          console.log(err.message);
+          })
+    //return response.json()
 
+}
 
 async function Get_Poll()
 {
@@ -150,13 +175,59 @@ export default function PollPage () {
       }
 
     //var data = Get_Poll();
+
+    const handleShowResult = (e,i) => {
+      e.preventDefault();
+      fetch(base_url+'/poll/pollresult', {
+        method: 'POST',
+        body: JSON.stringify({
+          // Add parameters here
+          'question_text' : data[i].question_text,
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+         .then((response) => response.json())
+         .then((data) => {
+
+       
+         })
+         .catch((err) => {
+            console.log(err.message);
+         })
+
+      //Update_Poll(data[i])
+
+  }
+  
     
     const handleEnd = (e,i) => {
         e.preventDefault();
         data[i].isActive = false
+        fetch(base_url+'/poll/endpoll', {
+          method: 'POST',
+          body: JSON.stringify({
+            // Add parameters here
+            'question_text' : data[i].question_text,
+          }),
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        })
+           .then((response) => response.json())
+           .then((data) => {
+
+         
+           })
+           .catch((err) => {
+              console.log(err.message);
+           })
+
         //Update_Poll(data[i])
 
     }
+    
     
     const handleVote = (e,voteAnswer,question) => {
         e.preventDefault();
@@ -195,6 +266,7 @@ export default function PollPage () {
                     {
                         status=== "success" &&(
                                 <div>
+                                  <h1 className='leaderboard'>Polls</h1>
                                     {
                                         data.map( (x, i)=>
                                         {
@@ -207,7 +279,8 @@ export default function PollPage () {
                                                             <br></br>
                                                             {PollCard(data[i])}
                                                             {/*<button onClick={handleVote(selected_choice,i)}>Submit Answer</button>*/}
-                                                            {ReactSession.get("is_moderator") === true&&<button onClick={e => handleEnd(e,i)}>End Poll</button>}
+                                                            {ReactSession.get("is_moderator") === true&&<button onClick={e => handleEnd(e,i)} >End Poll</button>} {'          '}
+                                                            {ReactSession.get("is_moderator") === true&&<button onClick={e => handleShowResult(e,i)} >Show Result</button>}
                                                         </div>
                                                     </div>
                                                     // <div className="row mb-3">
