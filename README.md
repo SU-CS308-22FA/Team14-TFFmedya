@@ -25,7 +25,7 @@ The project has been developed in Django Python v12.2 environment with ReactJS f
 
 ## User Documentation <a name="userdoc"/>
 ### Installing the Software <a name="installandrunsoftware"/>
-No installation is required. You can just click on the link: (to be changed)
+No installation is required. You can just click on the link: https://tffmedya.herokuapp.com/
 ### Reporting bugs <a name="reportbugs"/>
 To report a bug, you can mail to tffmedya@hotmail.com
 ### Known bugs <a name="knownbugs"/>
