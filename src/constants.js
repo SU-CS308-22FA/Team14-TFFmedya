@@ -1,1 +1,1 @@
-export const base_url = 'https://tffmedya.herokuapp.com'
+export const base_url = 'https://tffmedya-backend.herokuapp.com'
