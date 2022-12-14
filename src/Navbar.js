@@ -10,6 +10,7 @@ export default function Navbar(){
         <ul> 
             <CustomLink to="/profile">Profile</CustomLink>
             <CustomLink to="/poll">Polls</CustomLink>
+            <CustomLink to="/pollresults">Poll Results</CustomLink>
             <CustomLink to="/contest">Contests</CustomLink>
             <CustomLink to="/leaderboard">Leaderboard</CustomLink>
             <CustomLink to="/logout">Logout</CustomLink>

@@ -18,6 +18,7 @@ import Fixture from './Fixture';
 import Profile from './Profile';
 import PollPage from './Poll_Page';
 import PollCreate from './Poll_Create';
+import PollResults from './PollResults';
 import Review from './ReviewPage';
 import ForgotPassword from './Forgotpassword';
 import OTPPage from './OTPPage';
@@ -54,6 +55,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/poll" element={<PollPage />} /> 
             <Route path="/poll_create" element={<PollCreate />} /> 
+            <Route path="/pollresults" element={<PollResults />} /> 
             <Route path="/contest" element={<GuessingContestPage />} /> 
             <Route path="/contest_create" element={<ContestCreate />} /> 
             <Route path="/forgotpassword" element={<ForgotPassword />} /> 
