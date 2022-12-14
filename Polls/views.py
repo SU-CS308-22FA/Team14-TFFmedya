@@ -43,7 +43,31 @@ def Create(request):
             return JsonResponse("Data is not valid.", safe=False)
         except Exception as e:
             return JsonResponse("Fail in Create view. Error: " + str(e), safe=False)
+
+@csrf_exempt
+def GetPollResults(request):
+    if request.method == "POST":
+        try:
+            questions = Question.objects.all()
+        except Exception as e:
+            return JsonResponse("Could not get objects.", safe=False)
+        try:
+            Questions_serializer = QuestionSerializer(questions, many=True)
+        except Exception as e:
+            return JsonResponse("Could not serialize.", safe=False)
+        try:
             
+            data = Questions_serializer.data
+            
+            data = [k for k in data if k['isActive'] == False]
+            
+            return JsonResponse(data, safe=False)
+        except:
+            print("Could not return the objects")
+            return JsonResponse("Could not return the objects.", safe=False)
+
+
+
 """
 @csrf_exempt
 def Update(request):
@@ -124,11 +148,8 @@ def Results(request):
 def EndPoll(request):
     if request.method == 'POST':
         data = JSONParser().parse(request)
-        print(3)
         try:
-            print(4)
             Question.objects.filter(question_text = data['question_text']).update(isActive = False)
-            print(5)
             return JsonResponse('Successful', safe=False)
         except:
             return JsonResponse('Failed', safe=False)
