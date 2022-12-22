@@ -79,4 +79,4 @@ def Results(request):
         except Exception as e:
             return JsonResponse('Failed Getting the Question. The error message is: ' + str(e), safe=False)
         Evaluation_serializer = EvaluationSerializer(evaluation)
-        return JsonResponse(Evaluation_serializer, safe=False)
+        return JsonResponse(Evaluation_serializer.data, safe=False)
