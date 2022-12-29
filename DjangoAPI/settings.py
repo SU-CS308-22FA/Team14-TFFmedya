@@ -45,8 +45,7 @@ INSTALLED_APPS = [
     'Polls',
     'FixtureRefresh',
     'Evaluations',
-    'GuessingContest',
-    'chat'
+    'GuessingContest'
 ]
 
 ASGI_APPLICATION = "chat.routing.application" #routing.py will handle the ASGI
