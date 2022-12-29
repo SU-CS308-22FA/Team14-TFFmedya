@@ -79,6 +79,6 @@ def getStandings(request):
         try:
             standings = Standing.objects.all()
             standings_serializer = StandingSerializer(standings, many=True)
-            return(standings_serializer.data)
+            return JsonResponse(standings_serializer.data, safe=False)
         except Exception as e:
             return JsonResponse("Failed Getting the Standings. Error message: " + str(e), safe=False)
