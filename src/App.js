@@ -30,6 +30,7 @@ import Logout from './Logout';
 import GuessingContestPage from './GuessingContest';
 import ContestCreate from './Contest_Create';
 import Board from './Leaderboard';
+import Standings from './Standings.js';
 
 
 
@@ -64,6 +65,7 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/matchreview" element={<Review />} />
             <Route path="/leaderboard" element={<Board />} />
+            <Route path="/standings" element={<Standings />} />
             
           </Routes>
           

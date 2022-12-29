@@ -13,6 +13,7 @@ export default function Navbar(){
             <CustomLink to="/pollresults">Poll Results</CustomLink>
             <CustomLink to="/contest">Contests</CustomLink>
             <CustomLink to="/leaderboard">Leaderboard</CustomLink>
+            <CustomLink to="/standings">Standings</CustomLink>
             <CustomLink to="/logout">Logout</CustomLink>
             
             

@@ -1,1 +1,1 @@
-export const base_url = 'https://tffmedya-backend.herokuapp.com'
+export const base_url = 'http://localhost:8000'
