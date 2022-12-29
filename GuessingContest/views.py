@@ -18,8 +18,11 @@ def guessingContestShow(request):
             for j in range(len(choices)):
                 if choices[j].question == questions[i]:
                     temp.append(choices[j])
-            question_dict.append({'question_text' : questions[i].question_text, 'pub_date' : questions[i].pub_date, 'choices' : [{'option' : x.option, 'votes' : x.vote_count} for x in temp]})
+            question_dict.append({'question_text' : questions[i].question_text, 'pub_date' : questions[i].pub_date, 'isActive' : questions[i].isActive, 'choices' : [{'option' : x.option, 'votes' : x.vote_count} for x in temp]})
         #print(question_dict)
+        for i in range(len(question_dict)):
+            if question_dict[len(question_dict) - 1 - i]['isActive'] == False:
+                del question_dict[len(question_dict) - 1 - i]
         try:
             return JsonResponse(question_dict, safe=False)
         except:
@@ -70,15 +73,35 @@ def voteUpdate(request):
 def Leaderboard(request):
     if request.method == 'POST':
         try:
-            print(3)
             users = User.objects.all()
-            print(4)
-            dictt = [{'username' : x.UserName, 'point' : x.Point} for x in users]
-            print(5)
+            username_l = []
+            point_l = []
+            for i in users:
+                username_l.append(i.UserName)
+                point_l.append(i.Point)
+            point_l, username_l = zip(*sorted(zip(point_l, username_l)))
+            dictt = [{'username' : username_l[len(point_l) - x - 1], 'point' : point_l[len(point_l) - x - 1]} for x in range(len(point_l))]
             return JsonResponse(dictt, safe=False)
         except Exception as e:
             return JsonResponse("Failed", safe=False)
 
+@csrf_exempt
+def EndGuessingContest(request):
+    if request.method == 'POST':
+        try:
+            data = JSONParser().parse(request)
+            GuessingQuestion.objects.filter(question_text=data['question_text']).update(isActive = False)
+            votes = Votes.objects.all()
+            question = GuessingQuestion.objects.get(question_text = data['question_text'])
+            choice = Choice.objects.get(option = data['choice'])
+            for vote in votes:
+                if vote.poll == question and vote.choice == choice:
+                    user_mail = vote.user.Email
+                    user_point = vote.user.Point
+                    User.objects.filter(Email=user_mail).update(Point = user_point + 10)
+            return JsonResponse("Successful", safe=False)
+        except Exception as e:
+            return JsonResponse("Failed", safe=False)
 
 """
 @csrf_exempt
