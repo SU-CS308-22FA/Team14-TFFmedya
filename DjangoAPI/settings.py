@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'Evaluations',
     'GuessingContest',
     'Standings',
+    'Content'
     'Stats'
 ]
 

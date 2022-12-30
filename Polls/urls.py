@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^update$', views.CreateOrUpdateVote),
     url(r'^results$', views.Results),
     url(r'^endpoll$', views.EndPoll),
-    url(r'^showresult$', views.ShowResult)
+    url(r'^showresults$', views.ShowResult)
 ]
