@@ -1,5 +1,6 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import {ReactSession} from 'react-client-session'
+import logo from "./images/logo.png"
 
 export default function Navbar(){
    
@@ -8,6 +9,11 @@ export default function Navbar(){
     <nav className="nav">
         
         <ul> 
+            <CustomLink to = "/" > <img src={logo}  style={{
+            height: "50px",
+            width : "60px"
+               }}
+            /> </ CustomLink>
             <CustomLink to="/login">Login</CustomLink>
             <CustomLink to="/register">Register</CustomLink>
             <CustomLink to="/standings">Standings</CustomLink>
