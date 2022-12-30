@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'GuessingContest',
     'Standings',
     'Content'
+    'Stats'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
