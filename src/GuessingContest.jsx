@@ -75,6 +75,37 @@ async function Update_Contest(question, guessAnswer)
 
 }
 
+async function End_Contest(guessAnswer, question)
+{
+    console.log("Question is:",question)
+    await fetch(base_url +'/guessingcontest/endpoll', {
+      method: 'POST',
+      body: JSON.stringify({
+        // Add parameters here
+        'question_text' : question.question_text,
+        //'username' : ReactSession.get("username"),
+        'choice' : guessAnswer,
+        'isActive' : false
+      }),
+      headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+      },
+      })
+      
+          .then((response) => response.json())
+          .then((data) => {
+              console.log(data);
+              
+              // Handle data
+          })
+          .catch((err) => {
+          console.log(err.message);
+          })
+    //return response.json()
+
+}
+
+
 export default function GuessingContestPage () {
     const [selected_choice, setSelectedChoice] = useState('')
     const {data, status} = useQuery(["Questions"], Get_Contest)
@@ -108,6 +139,8 @@ export default function GuessingContestPage () {
                       <p style={{color:'black'}}>
                         {question.question_text}
                         
+                        
+                        
                       </p>
                     </div>
       
@@ -139,6 +172,7 @@ export default function GuessingContestPage () {
                   <MDBCardFooter>
                     <div className="text-end">
                       <button onClick={selected_choice !== "" ? (e) =>  handleGuess(e,selected_choice,question) : undefined}>Submit</button>
+                      {ReactSession.get("is_moderator") === true && <button onClick={selected_choice !== ""? (e) => handleEnd(e,selected_choice, question): undefined}>End Contest</button>}
                     </div>
                   </MDBCardFooter>
                     }
@@ -151,10 +185,12 @@ export default function GuessingContestPage () {
 
     //var data = Get_Poll();
     
-    const handleEnd = (e,i) => {
+    const handleEnd = (e,correctAnswer,question) => {
         e.preventDefault();
-        data[i].isActive = false
-        //Update_Poll(data[i])
+        console.log("Answer chosen is", correctAnswer)
+        console.log("Question is", question)
+        //question.isActive = false
+        End_Contest(correctAnswer, question)
 
     }
     
@@ -209,7 +245,7 @@ export default function GuessingContestPage () {
                                                             <br></br>
                                                             {ContestCard(data[i])}
                                                             {/*<button onClick={handleVote(selected_choice,i)}>Submit Answer</button>*/}
-                                                            {/*ReactSession.get("is_moderator") === true&&<button onClick={e => handleEnd(e,i)}>End Poll</button>*/}
+                                                            {/*ReactSession.get("is_moderator") === true&&<button onClick={e => handleEnd(e,i)}>End Contest</button>*/}
                                                         </div>
                                                     </div>
                                                     // <div className="row mb-3">

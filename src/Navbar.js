@@ -16,6 +16,7 @@ export default function Navbar(){
             <CustomLink to="/logout">Logout</CustomLink>
             
             
+            
         
         </ul>
     </nav>

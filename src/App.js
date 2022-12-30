@@ -23,6 +23,7 @@ import Review from './ReviewPage';
 import ForgotPassword from './Forgotpassword';
 import OTPPage from './OTPPage';
 import ChangePassword from './ChangePassword';
+import Stats from './Stats'
 
 
 import { ReactSession } from 'react-client-session';
@@ -64,6 +65,7 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/matchreview" element={<Review />} />
             <Route path="/leaderboard" element={<Board />} />
+            <Route path="/stats" element={<Stats />} />
             
           </Routes>
           
