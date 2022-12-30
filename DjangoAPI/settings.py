@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'FixtureRefresh',
     'Evaluations',
     'GuessingContest',
-    'Standings'
+    'Standings',
+    'Stats'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True

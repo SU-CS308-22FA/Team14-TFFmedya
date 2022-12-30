@@ -8,5 +8,6 @@ urlpatterns=[
     url(r'^guesscontestcreate$',views.guessingContestCreate),
     url(r'^guesscontestshow$',views.guessingContestShow),
     url(r'^voteUpdate$',views.voteUpdate),
-    url(r'^leaderboard$',views.Leaderboard)
+    url(r'^leaderboard$',views.Leaderboard),
+    url(r'^endpoll$',views.EndGuessingContest)
 ]
