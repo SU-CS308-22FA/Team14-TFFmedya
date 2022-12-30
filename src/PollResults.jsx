@@ -11,7 +11,7 @@ export default function PollResults () {
     async function GetEndedPolls()
     {
         //console.log(base_url+ "/poll/getresults")
-        let response = await fetch(base_url +'/poll/results', {
+        let response = await fetch(base_url +'/poll/index', {
 
         method: 'POST',
         headers: {
