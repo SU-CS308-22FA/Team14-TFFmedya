@@ -4,7 +4,7 @@ import './App.css';
 import {LeafPoll, Result } from 'react-leaf-polls'
 
 import { UserProvider } from "./utils/UserContext";
-import { useState } from 'react';
+import { useState  } from 'react';
 
 //import Navbar from "./Navbar";
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -31,6 +31,7 @@ import GuessingContestPage from './GuessingContest';
 import ContestCreate from './Contest_Create';
 import Board from './Leaderboard';
 import Standings from './Standings.js';
+import ModPage from './ModPage';
 
 
 
@@ -66,6 +67,7 @@ function App() {
             <Route path="/matchreview" element={<Review />} />
             <Route path="/leaderboard" element={<Board />} />
             <Route path="/standings" element={<Standings />} />
+            <Route path="/modpage" element={<ModPage />} />
             
           </Routes>
           
