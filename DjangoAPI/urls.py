@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^poll/', include('Polls.urls')),
     url(r'^fixture/', include('FixtureRefresh.urls')),
     url(r'^matchreview/', include('Evaluations.urls')),
-    url(r'guessingcontest/', include('GuessingContest.urls'))
+    url(r'guessingcontest/', include('GuessingContest.urls')),
+    url(r'stat/', include('Stats.urls'))
 ]
