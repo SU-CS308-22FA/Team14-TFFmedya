@@ -15,4 +15,4 @@ class Standing(models.Model):
     points = models.IntegerField(default = 0)
 
     def __str__(self):
-        return self.question_text
+        return self.team_name + str(self.points)
