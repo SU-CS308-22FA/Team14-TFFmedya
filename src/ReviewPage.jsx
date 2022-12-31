@@ -136,17 +136,17 @@ export default function Review () {
 
     return (
           
-        
-          
           <div>
           <button type="submit" id="submit" name="submit" className="btn btn-primary pull-right" onClick={handleSubmit}>View Stats</button>
+          <br></br>
+          <br></br>
 
-          <h2>Review</h2>
-          <h3>{match}</h3>
-          <h4>{match_date}</h4>
+          <h3 style={{fontSize: 25, fontWeight: 50}}>{match}</h3>
+          <h4 style={{fontSize: 25, fontWeight: 50}}>{match_date}</h4>
           <label >Share your comments on this match</label>
           <br></br>
           <input type="text"  name="firstName" class="form-control" value={comment} placeholder="Comment" onChange={e => setComment(e.target.value)} />
+          {"     "}
           <button onClick={e=>CreateComment(e)}>Add Comment</button>
             
         

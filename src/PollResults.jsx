@@ -44,7 +44,7 @@ export default function PollResults () {
             console.log("Poll",poll)
             var d = {}
             d["title"] = polls["choices"][poll]["option"]
-            d["value"] = 15 //polls["choices"][poll]["vote"]
+            d["value"] = polls["choices"][poll]["votes"]
             d["color"] =  "#add9c0"
             poll_data.push(d)
         }

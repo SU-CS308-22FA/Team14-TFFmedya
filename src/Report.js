@@ -4,7 +4,7 @@ import { Listbox } from '@headlessui/react'
 import React from 'react'
 import { ReactSession } from 'react-client-session'
 import {base_url} from "./constants"
-
+import { useNavigate  } from 'react-router-dom'
 
 export default function Report () {
  
@@ -13,12 +13,18 @@ export default function Report () {
     const [title, setTitle] = useState('')
     const [report_text, setReportText] = useState('')
     //const [errorMessage, setErrorMessage] = useState('')
+    const Navigate = useNavigate()
     const handleChange = (event) => {
 
     setValue(event.target.value);
 
     };
-   
+
+    const handleGo = (e) => {
+
+      e.preventDefault();
+      Navigate("/report_result");
+    }
     console.log("TTT:",title)
     const options = [
 
@@ -82,8 +88,17 @@ export default function Report () {
             <form role="form" onSubmit={handleSubmit}>
 
             <div>
+              { ReactSession.get("is_moderator") === true &&
+                <div>
+                    
+                    <button onClick={(e) => handleGo(e)}>Go to Reports</button>
+                    <br></br>
+
+                </div>
+                }
+              
               <label value={value} onChange={handleChange} style={{ fontSize: 25, fontWeight: 50 }}>
-         
+                <br></br>
                 Your reason of reporting
                 <br></br>
                 <br></br>

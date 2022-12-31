@@ -31,7 +31,8 @@ import Logout from './Logout';
 import GuessingContestPage from './GuessingContest';
 import ContestCreate from './Contest_Create';
 import Board from './Leaderboard';
-
+import ReportResults from './ReportResults';
+import ReportTypes from './ReportTypes';
 
 
 const queryClient = new QueryClient()
@@ -67,6 +68,9 @@ function App() {
             <Route path="/leaderboard" element={<Board />} />
             <Route path="/stats" element={<Stats />} />
             <Route path="/reports" element={<Report />} />
+            <Route path="/report_result" element={<ReportResults />} />
+            <Route path="/reporttypes" element={<ReportTypes />} />
+            
           </Routes>
           
         </div>  
