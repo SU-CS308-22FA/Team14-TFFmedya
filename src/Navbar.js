@@ -23,6 +23,7 @@ export default function Navbar(){
             {ReactSession.get("is_moderator") === true &&(
                 <CustomLink to="/modpage" >Moderator Page</CustomLink>
             )}       
+            <CustomLink to="/playersofmonth">Players of This Month</CustomLink>
             <CustomLink to="/logout">Logout</CustomLink>
             
             

@@ -32,6 +32,7 @@ import ContestCreate from './Contest_Create';
 import Board from './Leaderboard';
 import Standings from './Standings.js';
 import ModPage from './ModPage';
+import PlayersOfMonth from './players_of_month';
 
 
 
@@ -68,6 +69,8 @@ function App() {
             <Route path="/leaderboard" element={<Board />} />
             <Route path="/standings" element={<Standings />} />
             <Route path="/modpage" element={<ModPage />} />
+            <Route path="/playersofmonth" element={<PlayersOfMonth />} />
+
             
           </Routes>
           
