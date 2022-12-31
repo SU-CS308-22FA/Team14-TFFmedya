@@ -24,7 +24,7 @@ import ForgotPassword from './Forgotpassword';
 import OTPPage from './OTPPage';
 import ChangePassword from './ChangePassword';
 import Stats from './Stats'
-
+import Report from './Report'
 
 import { ReactSession } from 'react-client-session';
 import Logout from './Logout';
@@ -66,7 +66,7 @@ function App() {
             <Route path="/matchreview" element={<Review />} />
             <Route path="/leaderboard" element={<Board />} />
             <Route path="/stats" element={<Stats />} />
-            
+            <Route path="/reports" element={<Report />} />
           </Routes>
           
         </div>  

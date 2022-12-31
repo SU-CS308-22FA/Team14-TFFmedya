@@ -37,6 +37,7 @@ async function getComments()
 
 export default function Review () {
   const Navigate = useNavigate()
+  
   async function getComments() {
         
     console.log("mmm",match)
@@ -172,7 +173,7 @@ export default function Review () {
                                                       {"       "}
                                                       {data.comments[i].comment_text}
                                                       
-                                                      {/*info[i].comment_text getResultCard(info[i])*/}
+                                                      
                                                   </p>
                                               </div>
                                               </div>
