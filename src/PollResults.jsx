@@ -22,7 +22,7 @@ export default function PollResults () {
         .then((response) => response.json())
         .then((result) => {
             console.log(result);
-            
+
             return(result)
 
             // Handle data
@@ -30,7 +30,7 @@ export default function PollResults () {
         .catch((err) => {
         console.log(err.message);
         })*/
-       
+
         return response.json()
 
     }
@@ -44,7 +44,7 @@ export default function PollResults () {
             console.log("Poll",poll)
             var d = {}
             d["title"] = polls["choices"][poll]["option"]
-            d["value"] = 15 //polls["choices"][poll]["vote"]
+            d["value"] = polls["choices"][poll]["votes"]
             d["color"] =  "#add9c0"
             poll_data.push(d)
         }
@@ -55,7 +55,7 @@ export default function PollResults () {
             <header>
               <h1>React Bar Chart!</h1>
             </header>
-            <BarChart 
+            <BarChart
               xAxis={polls["question_text"]}
               yAxis="Values"
               height={400}
@@ -68,13 +68,13 @@ export default function PollResults () {
         /*
         polls.map((x,i) =>{
             return(
-                
+
                 <div className="row mb-3">
                 <div class="form-group col-md-4">
                     <br></br>
                     <li class = "card" >
                             <div>
-                        
+
                             <div class="card-content">
                                 <p >
                                     {polls[i].option}
@@ -82,7 +82,7 @@ export default function PollResults () {
                             </div>
                             </div>
                     </li>
-                    
+
                     {/*<button onClick={handleVote(selected_choice,i)}>Submit Answer</button>}
                 </div>
             </div>
@@ -96,26 +96,26 @@ export default function PollResults () {
 
     }
 
-    
+
 
     return (
-        
-        
+
+
         <div>
             <h2>results</h2>
             { status==="loading" && <div>Loading data</div>}
             { status==="error" && <div>Error fetching</div>}
-            {status === "success" && 
-            
+            {status === "success" &&
+
                 data.map( (x, i)=> {
-                                            
+
                     return(
                             <div className="row mb-3">
                                 <div class="form-group col-md-4">
                                     <br></br>
                                     <li class = "card" >
                                             <div>
-                                        
+
                                             <div class="card-content" style={{backgroundColor : "orange"}}>
                                                 <p >
                                                     {getResultCard(data[i])}
@@ -123,14 +123,14 @@ export default function PollResults () {
                                             </div>
                                             </div>
                                     </li>
-                                    
+
                                     {/*<button onClick={handleVote(selected_choice,i)}>Submit Answer</button>*/}
                                 </div>
                             </div>
                             );
                 })
             }
-         
-        </div> 
-    )   
+
+        </div>
+    )
 }
