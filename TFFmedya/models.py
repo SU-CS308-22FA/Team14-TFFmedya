@@ -24,3 +24,4 @@ class User(models.Model):
     is_moderator = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     Point = models.IntegerField(default=0)
+    isBanned = models.BooleanField(default=False)

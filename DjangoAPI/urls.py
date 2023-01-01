@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^matchreview/', include('Evaluations.urls')),
     url(r'guessingcontest/', include('GuessingContest.urls')),
     url(r'stat/', include('Stats.urls')),
-    url(r'report/', include('Reports.urls'))
+    url(r'report/', include('Reports.urls')),
+    url(r'ban/', include('Ban.urls'))
 ]

@@ -5,6 +5,7 @@ from django.http.response import JsonResponse
 import random
 
 from TFFmedya.models import Team,Player,User
+from Ban.models import Ban
 from TFFmedya.serializers import TeamSerializer,PlayerSerializer,UserSerializer
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
@@ -76,7 +77,11 @@ def userLoginApi(request,id=0):
         except:
             return JsonResponse("There is no user with this email.", safe=False)
         User_serializer=UserSerializer(user)
-        return JsonResponse(User_serializer.data,safe=False)
+        if user.isBanned == True:
+            ban = Ban.objects.get(User=user)
+            return JsonResponse(["Banned", ban.BanSebebi],safe=False)
+        else:
+            return JsonResponse(User_serializer.data,safe=False)
 
 @csrf_exempt
 def userRegisterApi(request,id=0):
