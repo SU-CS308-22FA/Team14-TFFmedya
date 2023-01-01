@@ -6,5 +6,6 @@ from django.conf import settings
 
 urlpatterns=[
     url(r'^report$',views.report),
-    url(r'^show$',views.show)
+    url(r'^show$',views.show),
+    url(r'^end$',views.end)
 ]

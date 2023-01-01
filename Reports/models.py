@@ -8,3 +8,4 @@ class Report(models.Model):
     ReportType = models.CharField(max_length=500)
     ReportTitle = models.CharField(max_length=500)
     Description = models.CharField(max_length=2000)
+    isDone = models.BooleanField(default=False)
