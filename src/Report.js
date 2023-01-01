@@ -25,6 +25,11 @@ export default function Report () {
       e.preventDefault();
       Navigate("/report_result");
     }
+    const handleBans = (e) => {
+
+      e.preventDefault();
+      Navigate("/report_bans");
+    }
     console.log("TTT:",title)
     const options = [
 
@@ -92,6 +97,7 @@ export default function Report () {
                 <div>
                     
                     <button onClick={(e) => handleGo(e)}>Go to Reports</button>
+                    <button onClick={(e) => handleBans(e)}>Go to Bans</button>
                     <br></br>
 
                 </div>

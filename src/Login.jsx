@@ -68,9 +68,17 @@ export default function Login()  {
              .then((response) => response.json())
              .then((data) => {
                 console.log(data);
-                if (data !== "There is no user with this email.") {
-                    //Login successful
+                if (data === "There is no user with this email.") {
+                    //Login unsuccessful
+                    setErrorMessage("Mail veya şifre bilginiz hatalı!")
+                    
+                }
+                else if(data[0] === "Banned")
+                {
+                    setErrorMessage("TFFMedya tarafından banlandınız! Sebebi:", data[1])
 
+                }
+                else {
                     ReactSession.set("username", data.UserName);
                     ReactSession.set("email", data.Email);
                     ReactSession.set("firstname", data.FirstName);
@@ -79,10 +87,8 @@ export default function Login()  {
                     ReactSession.set("is_moderator", data.is_moderator);
                     ReactSession.set("password", data.Password);
                     window.location.href = "/profile";
-                }
-                else {
                    
-                    setErrorMessage("Mail veya şifre bilginiz hatalı!")
+                    
 
                 }
                 /*

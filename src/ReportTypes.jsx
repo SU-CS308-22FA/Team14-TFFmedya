@@ -3,12 +3,52 @@ import {useQuery} from "react-query"
 import { Link, useNavigate,  useLocation, useHref } from 'react-router-dom'
 import {base_url} from "./constants"
 
+async function End_Report(report)
+{
+    console.log("Question is:",report)
+    await fetch(base_url +'/report/end', {
+      method: 'POST',
+      body: JSON.stringify({
+        // Add parameters here
+        'type' : report.type,
+        'title' : report.title,
+        'username' : report.username,
+        'report_text' : report.report_text,
+        
+      }),
+      headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+      },
+      })
+      
+          .then((response) => response.json())
+          .then((data) => {
+              console.log(data);
+              
+              // Handle data
+          })
+          .catch((err) => {
+          console.log(err.message);
+          })
+    //return response.json()
+
+}
+
+
 export default function ReportTypes () {
     const location = useLocation()
     const info= location.state
     console.log("info is", info)
     const {data, status} = useQuery(["Reports"], getReports)
-    
+
+    const handleEnd = (e,report) => {
+      e.preventDefault();
+      console.log("Data title", report.title)
+      End_Report(report)
+
+  }
+
+
 
     async function getReports() {
         
@@ -67,11 +107,12 @@ export default function ReportTypes () {
                                                       
                                                       
                                                   </p>
+                                              <button onClick={(e)=>handleEnd(e,data[i])}>End Report</button>
                                               </div>
                                               </div>
                                       </li>
                                       
-                                      {/*<button onClick={handleVote(selected_choice,i)}>Submit Answer</button>*/}
+                                      
                                   </div>
                               </div>
                               );

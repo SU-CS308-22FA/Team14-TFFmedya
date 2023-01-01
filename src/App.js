@@ -33,6 +33,7 @@ import ContestCreate from './Contest_Create';
 import Board from './Leaderboard';
 import ReportResults from './ReportResults';
 import ReportTypes from './ReportTypes';
+import Report_Bans from './Report_Bans';
 
 
 const queryClient = new QueryClient()
@@ -70,7 +71,7 @@ function App() {
             <Route path="/reports" element={<Report />} />
             <Route path="/report_result" element={<ReportResults />} />
             <Route path="/reporttypes" element={<ReportTypes />} />
-            
+            <Route path="/report_bans" element={<Report_Bans />} />
           </Routes>
           
         </div>  
