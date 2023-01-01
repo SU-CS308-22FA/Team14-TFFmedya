@@ -11,17 +11,17 @@ export default function Login()  {
 
     const [errorMessage, setErrorMessage] = useState('')
     const Navigate = useNavigate()
-    
+
     //const [user, setUser] =useState("Select User");
    // const handleData = (data) => { setUser(data) } ; console.log(user);
 
-    
-    
+
+
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
     //melih
     //const {isAuth, setisAuth} = useContext(UserContext);
-    
+
     // let history = useHistory();
 
     /*const handleSubmit = (e)=> {
@@ -43,7 +43,7 @@ export default function Login()  {
         });
     };
     */
-    
+
     const handleSubmit = (e) => {
 
         e.preventDefault();
@@ -71,11 +71,11 @@ export default function Login()  {
                 if (data === "There is no user with this email.") {
                     //Login unsuccessful
                     setErrorMessage("Mail veya şifre bilginiz hatalı!")
-                    
+
                 }
                 else if(data[0] === "Banned")
                 {
-                    setErrorMessage("TFFMedya tarafından banlandınız! Sebebi:", data[1])
+                    setErrorMessage("TFFMedya tarafından banlandınız! Sebebi: " + data[1])
 
                 }
                 else {
@@ -87,8 +87,8 @@ export default function Login()  {
                     ReactSession.set("is_moderator", data.is_moderator);
                     ReactSession.set("password", data.Password);
                     window.location.href = "/profile";
-                   
-                    
+
+
 
                 }
                 /*
@@ -110,13 +110,13 @@ export default function Login()  {
 
 
 
-    
-    
-    
+
+
+
     return (
-       
-      
-      
+
+
+
         <div className="auth-form-container">
             <h2>Giriş</h2>
             <form className="login-form" onSubmit={handleSubmit}>
@@ -129,21 +129,21 @@ export default function Login()  {
                 {errorMessage === '' ? null :
                     <span style={{
                       fontWeight: 'bold',
-                      color: 'red', 
-                      
+                      color: 'red',
+
                     }}>{errorMessage}<br/></span> }
-                
+
                 <button type="submit" >Giriş</button>
-                
+
             </form>
 
             <Link to= "/register"><button className = "link-btn" >Hesabınız yok mu? Üye olun.</button></Link>
             <Link to= "/forgotpassword"><button className = "link-btn" >Şifrenizi mi unuttunuz? Şifrenizi yenilemek için tıklayın.</button></Link>
         </div>
-       
-       
 
-        
+
+
+
     )
-   
+
 }
