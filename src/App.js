@@ -33,6 +33,7 @@ import Board from './Leaderboard';
 import Standings from './Standings.js';
 import ModPage from './ModPage';
 import PlayersOfMonth from './players_of_month';
+import CreateContent from './CreateContent';
 
 
 
@@ -70,6 +71,7 @@ function App() {
             <Route path="/standings" element={<Standings />} />
             <Route path="/modpage" element={<ModPage />} />
             <Route path="/playersofmonth" element={<PlayersOfMonth />} />
+            <Route path="/createcontent" element={<CreateContent />} />
 
             
           </Routes>
