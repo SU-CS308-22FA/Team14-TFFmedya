@@ -89,9 +89,10 @@ export default function PollCreate () {
             body: JSON.stringify({
               // Add parameters here
               'question_text' : question,
-              'pub_date' : '2022-11-14',
+
               'choices' : choices,
               'isPOTM' : checked
+
               
             }),
             headers: {
