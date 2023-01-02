@@ -13,7 +13,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=Question
-        fields=['question_text','pub_date', 'isActive', 'choices']
+        fields=['question_text','pub_date', 'isActive', 'isPOTM', 'choices']
 
     def update(self, instance, validated_data):
         choices_data = validated_data.pop('choices')

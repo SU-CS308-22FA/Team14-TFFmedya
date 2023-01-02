@@ -1,11 +1,13 @@
 from django.db import models
 from TFFmedya.models import User
+from django.utils import timezone
 
 # Create your models here.
 
 class Question(models.Model):
     question_text = models.CharField(max_length=250, unique=True)
-    pub_date = models.DateField('date published')
+    pub_date = models.DateField(default=timezone.now)
+    isPOTM = models.BooleanField(default = False)
     isActive = models.BooleanField(default = True)
 
     def __str__(self):

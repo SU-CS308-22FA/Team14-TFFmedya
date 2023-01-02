@@ -23,7 +23,7 @@ def Index(request):
             
             data = Questions_serializer.data
             
-            data = [k for k in data if k['isActive'] == True]
+            data = [k for k in data if k['isActive'] == True and k['isPOTM'] == False]
             
             return JsonResponse(data, safe=False)
         except:
@@ -155,3 +155,47 @@ def ShowResult(request):
             return JsonResponse(dictt, safe=False)
         except:
             return JsonResponse('Failed', safe=False)
+
+
+#############   Views For 11 Of The Moth    #################
+
+@csrf_exempt
+def createPOTM(request):
+    # url : poll/createpotm
+    # input: List of 11 questions with their answers
+    # "question_text" : question
+    # "choices" : [player1, player2, player3 ...]
+    # "isPOTM"
+    if request.method == "POST":
+        try:
+            questions = Question.objects.all()
+            for q in questions:
+                if q.isPOTM == True:
+                    q.delete()
+        except Exception as e:
+            return JsonResponse("Failed Deleting Old Entries. Error: " + str(e), safe=False)
+        try:
+            input = JSONParser().parse(request)
+            questions_serializer = QuestionSerializer(data=input, many=True)
+            if questions_serializer.is_valid(raise_exception=True):
+                questions_serializer.save()
+                return JsonResponse("POTM Question Added Successfully.", safe=False)
+        except Exception as e:
+            print("Failed Creating Player of the Month Poll. Error: " + str(e))
+            return JsonResponse("Failed Creating Player of the Month Poll. Error: " + str(e), safe=False)
+
+@csrf_exempt
+def getPOTM(request):
+    # url : poll/getpotm
+    # no input
+    
+    if request.method == "POST":
+        try:
+            questions = Question.objects.all()
+            questions = [k for k in questions if k.isPOTM == True]
+            questions_serializer = QuestionSerializer(questions, many=True)
+            return JsonResponse(questions_serializer.data, safe=False)
+
+        except Exception as e:
+            print("Failed Getting the POTM Questions. Error: " + str(e))
+            return JsonResponse("Failed Getting the POTM Questions. Error: " + str(e), safe=False)
