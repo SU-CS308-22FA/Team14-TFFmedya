@@ -279,8 +279,8 @@ export default function PollPage () {
                                                             <br></br>
                                                             {PollCard(data[i])}
                                                             {/*<button onClick={handleVote(selected_choice,i)}>Submit Answer</button>*/}
-                                                            {ReactSession.get("is_moderator") === true&&<button onClick={e => handleEnd(e,i)} >End Poll</button>} {'          '}
-                                                            {ReactSession.get("is_moderator") === true&&<button onClick={e => handleShowResult(e,i)} >Show Result</button>}
+                                                            {ReactSession.get("is_moderator") === true&&<button onClick={e => handleEnd(e,i)} >End Poll</button>}
+                                                            {/*ReactSession.get("is_moderator") === true&&<button onClick={e => handleShowResult(e,i)} >Show Result</button>*/}
                                                         </div>
                                                     </div>
                                                     // <div className="row mb-3">

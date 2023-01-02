@@ -63,7 +63,7 @@ const ImageSlider = ({ slides }) => {
   };
   const slideStylesWidthBackground = {
     ...slideStyles,
-    backgroundImage: `url(${slides[currentIndex].url})`,
+    backgroundImage: `url(${slides[currentIndex].image})`,
   };
 
   return (
@@ -86,7 +86,16 @@ const ImageSlider = ({ slides }) => {
           >
             ●
           </div>
+          
         ))}
+       </div> 
+      <div style={{fontSize : "26px"}}>
+    
+        <br></br>
+        {slides[currentIndex].caption}
+        <br></br>
+        <a href={slides[currentIndex].ref_link} target="_blank"> Daha fazla bilgi için tıklayınız.</a>
+        
       </div>
     </div>
   );

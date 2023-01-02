@@ -89,7 +89,10 @@ export default function PollCreate () {
             body: JSON.stringify({
               // Add parameters here
               'question_text' : question,
-              'choices' : choices
+
+              'choices' : choices,
+              'isPOTM' : checked
+
               
             }),
             headers: {
@@ -115,7 +118,11 @@ export default function PollCreate () {
              })
 
     }
+    const [checked, setChecked] = React.useState(false);
 
+    const handleChange = () => {
+      setChecked(!checked);
+    };
     
     return (
 
@@ -165,7 +172,16 @@ export default function PollCreate () {
                
        </div>
      </div>
+     <label>
+        <input type="checkbox"
+         checked={checked}
+         onChange={handleChange} />
+         {'       '}
+        POTM Question
+      </label>
+      <br></br>
      <button type="submit" id="submit" name="submit" className="btn btn-primary pull-right">Add Post</button>
+    
     </form>
     </Container>
     </div>

@@ -1,8 +1,5 @@
 import React, { Component } from "react"
-import teamMapping from "./team-mapping.json"
 import styled from "styled-components"
-import EPLLogo from "./logo/epl-logo"
-
 // This needs to be a stateful component to work with react-flip-move
 class StandingsRow extends Component {
   render() {
