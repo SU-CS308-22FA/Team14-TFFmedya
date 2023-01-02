@@ -188,13 +188,18 @@ def createPOTM(request):
 def getPOTM(request):
     # url : poll/getpotm
     # no input
-    
+
     if request.method == "POST":
         try:
             questions = Question.objects.all()
             questions = [k for k in questions if k.isPOTM == True]
             questions_serializer = QuestionSerializer(questions, many=True)
-            return JsonResponse(questions_serializer.data, safe=False)
+
+            output = {}
+            for q in questions_serializer.data:
+                output[q["question_text"]] = [i["option"] for i in q["choices"]]
+
+            return JsonResponse(output, safe=False)
 
         except Exception as e:
             print("Failed Getting the POTM Questions. Error: " + str(e))

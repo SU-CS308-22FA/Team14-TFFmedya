@@ -4,9 +4,10 @@ from rest_framework.parsers import JSONParser
 from .models import Content
 from django.http.response import JsonResponse
 from .serializers import ContentSerializer
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
-
+@csrf_exempt
 def Index(request):
     if request.method == "POST":
         posts = Content.objects.all()
@@ -18,7 +19,7 @@ def Index(request):
         ##############################
         return JsonResponse(Posts_serializer.data, safe=False)
 
-
+@csrf_exempt
 def postContent(request):
     # input:
     # "caption" = caption,
@@ -27,8 +28,9 @@ def postContent(request):
         Content_data = JSONParser().parse(request)
         caption = Content_data["caption"]
         image = Content_data["image"]
+        ref_url = Content_data["ref_url"]
         try:
-            content = Content(caption=caption, image=image)
+            content = Content(caption=caption, image=image , ref_link = ref_url)
             content.save()
         except Exception as e:
             print("Failed saving the content. Error message: " + str(e))
