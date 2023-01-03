@@ -6,6 +6,7 @@ from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser
 from .serializers import QuestionSerializer
 from django.views.decorators.csrf import csrf_exempt
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 
 @csrf_exempt
@@ -204,3 +205,29 @@ def getPOTM(request):
         except Exception as e:
             print("Failed Getting the POTM Questions. Error: " + str(e))
             return JsonResponse("Failed Getting the POTM Questions. Error: " + str(e), safe=False)
+
+
+@csrf_exempt
+def CreateWithOverride(request):
+    if request.method == 'POST':
+        try:
+            Question_data = JSONParser().parse(request)
+            try:
+                q = Question.objects.get(question_text = Question_data['question_text'])
+                print(q)
+                q.delete()
+            except ObjectDoesNotExist:
+                Question_serializer = QuestionSerializer(data=Question_data)
+                if Question_serializer.is_valid(raise_exception=True):
+                    Question_serializer.save()
+                    return JsonResponse("Question Added Successfully", safe=False)
+                return JsonResponse("Data is not valid.", safe=False)
+            except Exception as e:
+                return JsonResponse("Fail While Getting the Question. Error: " + str(e), safe=False)
+            Question_serializer = QuestionSerializer(data=Question_data)
+            if Question_serializer.is_valid(raise_exception=True):
+                Question_serializer.save()
+                return JsonResponse("Question Added Successfully", safe=False)
+            return JsonResponse("Data is not valid.", safe=False)
+        except Exception as e:
+            return JsonResponse("Fail in CreateWithOverride view. Error: " + str(e), safe=False)

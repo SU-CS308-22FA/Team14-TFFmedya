@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^endpoll$', views.EndPoll),
     url(r'^showresults$', views.ShowResult),
     url(r'^createpotm$', views.createPOTM),
-    url(r'^getpotm$', views.getPOTM)
+    url(r'^getpotm$', views.getPOTM),
+    url(r'^put$', views.CreateWithOverride)
 ]
