@@ -34,6 +34,7 @@ import Standings from './Standings.js';
 import ModPage from './ModPage';
 import PlayersOfMonth from './players_of_month';
 import CreateContent from './CreateContent';
+import PotmResults from './PotmResults';
 
 
 
@@ -72,6 +73,7 @@ function App() {
             <Route path="/modpage" element={<ModPage />} />
             <Route path="/playersofmonth" element={<PlayersOfMonth />} />
             <Route path="/createcontent" element={<CreateContent />} />
+            <Route path="/potmresults" element={<PotmResults />} />
 
             
           </Routes>

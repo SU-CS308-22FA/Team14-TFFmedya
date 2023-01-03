@@ -4,7 +4,7 @@ import Select from "react-select"
 import { base_url } from './constants';
 import {useQuery} from "react-query"
 import { ReactSession } from 'react-client-session'
-
+import PotmResults from './PotmResults';
 
 var choices = {}
 
@@ -180,15 +180,21 @@ const PlayersOfMonth = () => {
  }
     return (
       
-        <div>
-           <br></br> 
-          <h1>Ayın 11'i Adaylarınızı Seçiniz</h1>
-          <br></br>
-          <div>
+      
+      <div>
+          
+          
           { status==="loading" && <div>Loading data</div>}
                     { status==="error" && <div>Error fetching</div>}
                     {
                         status=== "success" &&(
+                           data.status === "inactive" ? <PotmResults data = {data} /> :
+         <div>             
+               <br></br> 
+               <h1>Ayın 11'i Adaylarınızı Seçiniz</h1>
+               <br></br>
+
+         
             <div className="pitch">
                {/* Goalkeeper */}
                
@@ -223,8 +229,9 @@ const PlayersOfMonth = () => {
                <div className='playerNames' style={{ top: "800px", left : "43%" }} > <Select options={CFoptions} onChange={(selectedOption )=> handleChange(selectedOption, "CF")}/> </div>
                
             </div>
-         )}          
-         </div>  
+          
+                  
+        
           <br></br>
           {errorMessage === '' ? null :
                     <span style={{
@@ -233,7 +240,10 @@ const PlayersOfMonth = () => {
                       
                     }}>{errorMessage}<br/></span> }
           
-          <button onClick={handleClick}>{loading ? <>Yükleniyor..</> : <>Oyuncuları Seçiniz</>}</button>   {/* bunun için form oluşturmalıyım handlesubmit falan olacak */}
+          <button onClick={handleClick}>{loading ? <>Yükleniyor..</> : <>Oyuncuları Seçiniz</>}</button>
+         </div>  
+         )} 
+         
         </div>
         
       );
