@@ -194,12 +194,17 @@ def getPOTM(request):
         try:
             questions = Question.objects.all()
             questions = [k for k in questions if k.isPOTM == True]
+            if questions[0].isActive : 
+                status = "active"
+            else :
+                status = "inactive"    
             questions_serializer = QuestionSerializer(questions, many=True)
 
             output = {}
             for q in questions_serializer.data:
                 output[q["question_text"]] = [i["option"] for i in q["choices"]]
-
+            
+            output["status"] = status
             return JsonResponse(output, safe=False)
 
         except Exception as e:
@@ -231,3 +236,18 @@ def CreateWithOverride(request):
             return JsonResponse("Data is not valid.", safe=False)
         except Exception as e:
             return JsonResponse("Fail in CreateWithOverride view. Error: " + str(e), safe=False)
+
+@csrf_exempt
+def EndPotm(request):
+    if request.method == 'POST':
+        try:
+            questions = Question.objects.all()
+            questions = [k for k in questions if k.isPOTM == True]
+            for q in questions :
+                q.isActive = False 
+                q.save()
+            print("Successfull")
+            return JsonResponse('Successful', safe=False)
+        except Exception as e:
+            print("Failed. " + str(e))
+            return JsonResponse('Failed', safe=False)

@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^showresults$', views.ShowResult),
     url(r'^createpotm$', views.createPOTM),
     url(r'^getpotm$', views.getPOTM),
-    url(r'^put$', views.CreateWithOverride)
+    url(r'^put$', views.CreateWithOverride),
+    url(r'^endpotm$', views.EndPotm)
 ]
