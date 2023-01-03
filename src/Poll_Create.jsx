@@ -63,7 +63,7 @@ export default function PollCreate () {
 
     
     const handleSubmit = (e) => {
-
+        const endpoint = checked ? "put" : "create"
         e.preventDefault();
         var choices = [];
         Q = question;
@@ -83,13 +83,11 @@ export default function PollCreate () {
 
         
 
-        
-        fetch(base_url+'/poll/create', {
+        fetch(base_url+'/poll/' + endpoint, {
             method: 'POST',
             body: JSON.stringify({
               // Add parameters here
               'question_text' : question,
-
               'choices' : choices,
               'isPOTM' : checked
 
