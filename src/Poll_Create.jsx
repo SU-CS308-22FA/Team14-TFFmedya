@@ -90,6 +90,7 @@ export default function PollCreate () {
               'question_text' : question,
               'choices' : choices,
               'isPOTM' : checked
+
               
             }),
             headers: {
