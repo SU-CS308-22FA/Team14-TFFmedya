@@ -17,9 +17,9 @@ export default function Navbar(){
             <CustomLink to="/login">Login</CustomLink>
             <CustomLink to="/register">Register</CustomLink>
             <CustomLink to="/standings">Standings</CustomLink>
-            
-            
-        
+
+
+
         </ul>
     </nav>
     )
@@ -28,10 +28,10 @@ export default function Navbar(){
 function CustomLink({to,children, ...props}){
     const resolvedPath = useResolvedPath(to)
     const isActive = useMatch({path: resolvedPath.pathname, end: true   })
-   
+
     return(
-        <li className={isActive ? "active" : ""}>   
-        <Link to={to} {...props}>{children}</Link> 
-        </li> 
-    )
+            <li className={isActive ? "active" : ""}>
+                <Link to={to} {...props}>{children}</Link>
+            </li>
+            )
 }

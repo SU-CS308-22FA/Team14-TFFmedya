@@ -179,7 +179,7 @@ export default function PollCreate () {
       </label>
       <br></br>
      <button type="submit" id="submit" name="submit" className="btn btn-primary pull-right">Add Post</button>
-    
+
     </form>
     </Container>
     </div>
@@ -192,11 +192,11 @@ export default function PollCreate () {
                   <h2>Create polls</h2>
                   <input type="text" className="form-control" id="title" name="title" placeholder="Title" required />
                 </div>
-                            
+
                 <div className="form">
                 <input type="text" className="form-control" id="question" name="question" placeholder="Your poll question" required />
                 </div>
-                   
+
               <button type="submit" id="submit" name="submit" className="btn btn-primary pull-right">Add Post</button>
               </form>
 
@@ -206,13 +206,13 @@ export default function PollCreate () {
         <Poll question={pollQuestion} answers={pollAnswers} onVote={handleVote} />
         </div>*/
 
- 
-        
-       
-    
-           
-         
-       
-           
-    )   
+
+
+
+
+
+
+
+
+        )
 }

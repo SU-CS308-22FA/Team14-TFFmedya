@@ -24,24 +24,24 @@ async function End_Poll(question)
 {
     
     await fetch(base_url +'/poll/endpoll', {
-      method: 'POST',
-      body: JSON.stringify({
-        // Add parameters here
-        'question' : question.question_text,
-      }),
-      headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-      },
-      })
-      
+        method: 'POST',
+        body: JSON.stringify({
+            // Add parameters here
+            'question' : question.question_text,
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+
           .then((response) => response.json())
           .then((data) => {
               console.log(data);
-              
+
               // Handle data
           })
           .catch((err) => {
-          console.log(err.message);
+              console.log(err.message);
           })
     //return response.json()
 
@@ -52,12 +52,12 @@ async function Get_Poll()
     console.log(base_url+ "/poll/index")
     let response = await fetch(base_url +'/poll/index', {
 
-      method: 'POST',
-      headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-      },
-      })
-      /*
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+    /*
           .then((response) => response.json())
           .then((data) => {
               console.log(data);
@@ -75,26 +75,26 @@ async function Update_Poll(question, voteAnswer)
 {
     console.log("Question is:",question)
     await fetch(base_url +'/poll/update', {
-      method: 'POST',
-      body: JSON.stringify({
-        // Add parameters here
-        'question' : question.question_text,
-        'username' : ReactSession.get("username"),
-        'choice' : voteAnswer,
-      }),
-      headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-      },
-      })
-      
+        method: 'POST',
+        body: JSON.stringify({
+            // Add parameters here
+            'question' : question.question_text,
+            'username' : ReactSession.get("username"),
+            'choice' : voteAnswer,
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+
           .then((response) => response.json())
           .then((data) => {
               console.log(data);
-              
+
               // Handle data
           })
           .catch((err) => {
-          console.log(err.message);
+              console.log(err.message);
           })
     //return response.json()
 
@@ -117,118 +117,118 @@ export default function PollPage () {
     function PollCard(question) {
 
         const handleChange = (event) => {
-          event.preventDefault();
-          setSelectedChoice(event.target.value)
+            event.preventDefault();
+            setSelectedChoice(event.target.value)
         }
         //var selected_choice = ""
         return (
-          <MDBContainer>
-            <MDBRow className="justify-content-center">
-              <MDBCol size="6">
-                <MDBCard style={{color : "green", backgroundColor : "orange"}}>
-                  <MDBCardBody>
-                    <div className="text-center">
-                      <MDBIcon far icon="file-alt mb-3 text-primary" size="4x" />
-                      
-                      <p style={{color:'black'}}>
-                        {question.question_text}
-                        
-                      </p>
-                    </div>
-      
-                    <hr />
-      
-                    <form className="px-4" action="">
-                      <p className="text-center">
-                        <strong>Your Answer:</strong>
-                      </p>
-                      {
-                        question.choices.map((choice, i) => {
-                          return(
-                            <div>
-                              <input 
-                              type="radio"
-                              value={choice.option}
-                              checked={selected_choice === choice.option}
-                              onChange={handleChange}
-                              name="choice" /> {choice.option} 
-                            </div>
-                          )
-                        })
-                      }
-                      
-                    </form>
-                    
-                  </MDBCardBody>
-                  {
-                  <MDBCardFooter>
-                    <div className="text-end">
-                      <button onClick={selected_choice !== "" ? (e) =>  handleVote(e,selected_choice,question) : undefined}>Submit</button>
-                    </div>
-                  </MDBCardFooter>
-                    }
-                </MDBCard>
-              </MDBCol>
-            </MDBRow>
-                    </MDBContainer>
-        );
-      }
+                <MDBContainer>
+                    <MDBRow className="justify-content-center">
+                        <MDBCol size="6">
+                            <MDBCard style={{color : "green", backgroundColor : "orange"}}>
+                                <MDBCardBody>
+                                    <div className="text-center">
+                                        <MDBIcon far icon="file-alt mb-3 text-primary" size="4x" />
+
+                                        <p style={{color:'black'}}>
+                                            {question.question_text}
+
+                                        </p>
+                                    </div>
+
+                                    <hr />
+
+                                    <form className="px-4" action="">
+                                        <p className="text-center">
+                                            <strong>Your Answer:</strong>
+                                        </p>
+                                        {
+                                            question.choices.map((choice, i) => {
+                                                return(
+                                                        <div>
+                                                            <input
+                                                                type="radio"
+                                                                value={choice.option}
+                                                                checked={selected_choice === choice.option}
+                                                                onChange={handleChange}
+                                                                name="choice" /> {choice.option}
+                                                        </div>
+                                                        )
+                                            })
+                                        }
+
+                                    </form>
+
+                                </MDBCardBody>
+                                {
+                                    <MDBCardFooter>
+                                        <div className="text-end">
+                                            <button onClick={selected_choice !== "" ? (e) =>  handleVote(e,selected_choice,question) : undefined}>Submit</button>
+                                        </div>
+                                    </MDBCardFooter>
+                                }
+                            </MDBCard>
+                        </MDBCol>
+                    </MDBRow>
+                </MDBContainer>
+                );
+    }
 
     //var data = Get_Poll();
 
     const handleShowResult = (e,i) => {
-      e.preventDefault();
-      fetch(base_url+'/poll/pollresult', {
-        method: 'POST',
-        body: JSON.stringify({
-          // Add parameters here
-          'question_text' : data[i].question_text,
-        }),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      })
+        e.preventDefault();
+        fetch(base_url+'/poll/pollresult', {
+            method: 'POST',
+            body: JSON.stringify({
+                // Add parameters here
+                'question_text' : data[i].question_text,
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
          .then((response) => response.json())
          .then((data) => {
 
-       
+
          })
          .catch((err) => {
-            console.log(err.message);
+             console.log(err.message);
          })
 
-      //Update_Poll(data[i])
+        //Update_Poll(data[i])
 
-  }
-  
-    
+    }
+
+
     const handleEnd = (e,i) => {
         e.preventDefault();
         data[i].isActive = false
         fetch(base_url+'/poll/endpoll', {
-          method: 'POST',
-          body: JSON.stringify({
-            // Add parameters here
-            'question_text' : data[i].question_text,
-          }),
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
+            method: 'POST',
+            body: JSON.stringify({
+                // Add parameters here
+                'question_text' : data[i].question_text,
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
         })
            .then((response) => response.json())
            .then((data) => {
 
-         
+
            })
            .catch((err) => {
-              console.log(err.message);
+               console.log(err.message);
            })
 
         //Update_Poll(data[i])
 
     }
-    
-    
+
+
     const handleVote = (e,voteAnswer,question) => {
         e.preventDefault();
         console.log("Data???",voteAnswer)
@@ -256,7 +256,7 @@ export default function PollPage () {
                 </div>
                 }
 
-        
+
 
                 <div>
 
@@ -266,13 +266,13 @@ export default function PollPage () {
                     {
                         status=== "success" &&(
                                 <div>
-                                  <h1 className='leaderboard'>Polls</h1>
+                                    <h1 className='leaderboard'>Polls</h1>
                                     {
                                         data.map( (x, i)=>
                                         {
-                                           
+
                                             return(
-                                                    
+
 
                                                     <div className="row mb-3">
                                                         <div class="form-group col-md-4">

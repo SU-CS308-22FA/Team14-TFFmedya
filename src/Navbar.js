@@ -24,6 +24,7 @@ export default function Navbar(){
                 <CustomLink to="/modpage" >Moderator Page</CustomLink>
             )}       
             <CustomLink to="/playersofmonth">Players of This Month</CustomLink>
+            <CustomLink to="/reports">Report</CustomLink>
             <CustomLink to="/logout">Logout</CustomLink>
             
             

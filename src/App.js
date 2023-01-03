@@ -23,6 +23,8 @@ import Review from './ReviewPage';
 import ForgotPassword from './Forgotpassword';
 import OTPPage from './OTPPage';
 import ChangePassword from './ChangePassword';
+import Stats from './Stats'
+import Report from './Report'
 
 
 import { ReactSession } from 'react-client-session';
@@ -35,6 +37,9 @@ import ModPage from './ModPage';
 import PlayersOfMonth from './players_of_month';
 import CreateContent from './CreateContent';
 import PotmResults from './PotmResults';
+import ReportResults from './ReportResults';
+import ReportTypes from './ReportTypes';
+import Report_Bans from './Report_Bans';
 
 
 
@@ -74,6 +79,11 @@ function App() {
             <Route path="/playersofmonth" element={<PlayersOfMonth />} />
             <Route path="/createcontent" element={<CreateContent />} />
             <Route path="/potmresults" element={<PotmResults />} />
+            <Route path="/stats" element={<Stats />} />
+            <Route path="/reports" element={<Report />} />
+            <Route path="/report_result" element={<ReportResults />} />
+            <Route path="/reporttypes" element={<ReportTypes />} />
+            <Route path="/report_bans" element={<Report_Bans />} />
 
             
           </Routes>

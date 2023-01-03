@@ -1,41 +1,76 @@
 import React, { useState } from 'react'
-import { Link, useNavigate,  useLocation } from 'react-router-dom'
+import { Link, useNavigate,  useLocation, useHref } from 'react-router-dom'
 import {base_url} from "./constants"
 import { ReactSession } from 'react-client-session'
+import {useQuery} from "react-query"
+import Stats from './Stats'
+
+/*
+async function getComments()
+{
+    //console.log(base_url+ "/guessingcontest/guesscontestshow")
+    let response = await fetch(base_url+'/matchreview/comments', {
+
+      method: 'POST',
+      headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+      },
+      })
+      /*
+          .then((response) => response.json())
+          .then((data) => {
+              console.log(data);
+              console.log(data[0].choices[0].option);
+              // Handle data
+          })
+          .catch((err) => {
+          console.log(err.message);
+          })
+    return response.json()
+
+}*/
 
 
-const getComments = (match) => {
+
+
+
+
+export default function Review () {
+  const Navigate = useNavigate()
+  
+  async function getComments() {
         
-                
-    fetch(base_url+'/matchreview/comments', {
+    console.log("mmm",match)
+    let response = await fetch(base_url+'/matchreview/comments', {
         method: 'POST',
         body: JSON.stringify({
           // Add parameters here
-          'match' : match,
 
+          'match' : match,
           
         }),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
       })
+        /*
          .then((response) => response.json())
          .then((data) => {
-            console.log(data);
-
-            return data
+            console.log("Data is:", data.comments);
+            const comments = data.comments;
+            return comments
   
 
          })
          .catch((err) => {
             console.log(err.message);
-         })
-
+         })*/
+     
+      return response.json();
         
-}
-
-export default function Review () {
+  }
   const [comment, setComment] = useState('')
+
 
   const CreateComment = (e) => {
 
@@ -78,42 +113,80 @@ export default function Review () {
 
 
     const location = useLocation()
-    //const {match, match_date} = location.state
-    const data= location.state
-    const match = data.match
-    const match_date = data.match_date
-    //const comments = getComments(match);
+    const info= location.state
+    console.log("info is", info)
+    const match = info.match
+    const match_date = info.match_date
+    const {data, status} = useQuery(["Comments"], getComments)
+    console.log("type of info ",typeof(data))
+    console.log(status)
+    //console.log("status", status)
+
+    const handleSubmit = (e) => {
+
+      e.preventDefault();
+      const teams = match.split("-")
+      var hometeam = teams[0]
+      var awayteam = teams[1]
+      console.log("Team1 is", hometeam)
+      const m = {hometeam: hometeam, awayteam:awayteam}
+      Navigate("/stats", {state : m});
+      //window.location.href = "/stats";
+  }
 
     return (
-        <div>
-        <h2>Review</h2>
-        <h3>{match}</h3>
-        <h4>{match_date}</h4>
-        <label >Share your comments on this match</label>
-        <br></br>
-        <input type="text"  name="firstName" class="form-control" value={comment} placeholder="Comment" onChange={e => setComment(e.target.value)} />
-        <button onClick={e=>CreateComment(e)}>Add Comment</button>
-        </div>
-        /*
-        <div>
+          
+          <div>
+          <button type="submit" id="submit" name="submit" className="btn btn-primary pull-right" onClick={handleSubmit}>View Stats</button>
+          <br></br>
+          <br></br>
+
+          <h3 style={{fontSize: 25, fontWeight: 50}}>{match}</h3>
+          <h4 style={{fontSize: 25, fontWeight: 50}}>{match_date}</h4>
+          <label >Share your comments on this match</label>
+          <br></br>
+          <input type="text"  name="firstName" class="form-control" value={comment} placeholder="Comment" onChange={e => setComment(e.target.value)} />
+          {"     "}
+          <button onClick={e=>CreateComment(e)}>Add Comment</button>
+            
         
-        </div>*/
+              <h2>results</h2>
+            
 
-    /*
-    <form role="form" onSubmit={handleSubmit}>
-
-     <div className="row">
-       <div className="col-sm-12">   
-          <div class="form-group col-md-4">
-            <label >Enter your comment</label>
-            <br></br>
-            <input type="text"  name="firstName" class="form-control" value={comment} placeholder="Comment" onChange={e => setQuestion(e.target.value)} />
-          </div>  
-       </div>
-     </div>
-     <button type="submit" id="submit" name="submit" className="btn btn-primary pull-right">Add Comment</button>
-    </form>
-      */
-     
-    )
+              { status==="loading" && <div>Loading data</div>}
+              { status==="error" && <div>Error fetching</div>}
+              
+              {status === "success" && 
+                    data.comments.map( (x, i)=> {
+                      return(
+                              <div className="row mb-3">
+                                  <div class="form-group col-md-4">
+                                      <br></br>
+                                      <li class = "card" >
+                                              <div>
+                                          
+                                              <div class="card-content" style={{backgroundColor : "orange"}}>
+                                                  <p >
+                                                      {data.comments[i].user}
+                                                      :
+                                                      {"       "}
+                                                      {"       "}
+                                                      {data.comments[i].comment_text}
+                                                      
+                                                      
+                                                  </p>
+                                              </div>
+                                              </div>
+                                      </li>
+                                      
+                                      {/*<button onClick={handleVote(selected_choice,i)}>Submit Answer</button>*/}
+                                  </div>
+                              </div>
+                              );
+                    })
+                  }
+                
+        </div> 
+        
+    )     
 }

@@ -71,8 +71,10 @@ const handleClick = (e, element, Navigate) => {
 
     e.preventDefault();
     CreateEvaluations(e, element);
+    //CreateStats(e, element);
     const m = {match: element.HomeTeam + " - " + element.AwayTeam, match_date:element.MatchDate}
     Navigate("/matchreview", {state : m});
+    
     
 }
 

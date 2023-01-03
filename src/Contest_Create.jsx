@@ -89,6 +89,7 @@ export default function ContestCreate () {
             body: JSON.stringify({
               // Add parameters here
               'question_text' : question,
+              'pub_date' : '2022-11-14',
               'choices' : choices
               
             }),
