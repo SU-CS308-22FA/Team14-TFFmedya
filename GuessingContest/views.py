@@ -19,12 +19,16 @@ def guessingContestShow(request):
                 if choices[j].question == questions[i]:
                     temp.append(choices[j])
             question_dict.append({'question_text' : questions[i].question_text, 'pub_date' : questions[i].pub_date, 'isActive' : questions[i].isActive, 'choices' : [{'option' : x.option, 'votes' : x.vote_count} for x in temp]})
-        #print(question_dict)
+        print(len(question_dict))
+        temp = []
+        asil = []
         for i in range(len(question_dict)):
-            if question_dict[len(question_dict) - 1 - i]['isActive'] == False:
-                del question_dict[len(question_dict) - 1 - i]
+            if question_dict[i]['isActive'] == True:
+                temp.append(i)
+        for i in range(len(temp)):
+            asil.append(question_dict[temp[i]])
         try:
-            return JsonResponse(question_dict, safe=False)
+            return JsonResponse(asil, safe=False)
         except:
             return JsonResponse("Could not return the objects.", safe=False)
 

@@ -27,5 +27,7 @@ urlpatterns = [
     url(r'guessingcontest/', include('GuessingContest.urls')),
     url(r'standings/', include('Standings.urls')),
     url(r'stat/', include('Stats.urls')),
+    url(r'report/', include('Reports.urls')),
+    url(r'ban/', include('Ban.urls')),
     url(r'content/', include('Content.urls'))
 ]
