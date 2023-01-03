@@ -61,11 +61,11 @@ async function Update_Contest(question, guessAnswer)
           'Content-type': 'application/json; charset=UTF-8',
       },
       })
-      
+
           .then((response) => response.json())
           .then((data) => {
               console.log(data);
-              
+
               // Handle data
           })
           .catch((err) => {
@@ -91,11 +91,11 @@ async function End_Contest(guessAnswer, question)
           'Content-type': 'application/json; charset=UTF-8',
       },
       })
-      
+
           .then((response) => response.json())
           .then((data) => {
               console.log(data);
-              
+
               // Handle data
           })
           .catch((err) => {
@@ -135,17 +135,17 @@ export default function GuessingContestPage () {
                   <MDBCardBody>
                     <div className="text-center">
                       <MDBIcon far icon="file-alt mb-3 text-primary" size="4x" />
-                      
+
                       <p style={{color:'black'}}>
                         {question.question_text}
-                        
-                        
-                        
+
+
+
                       </p>
                     </div>
-      
+
                     <hr />
-      
+
                     <form className="px-4" action="">
                       <p className="text-center">
                         <strong>Your Answer:</strong>
@@ -154,19 +154,19 @@ export default function GuessingContestPage () {
                         question.choices.map((choice, i) => {
                           return(
                             <div>
-                              <input 
+                              <input
                               type="radio"
                               value={choice.option}
                               checked={selected_choice === choice.option}
                               onChange={handleChange}
-                              name="choice" /> {choice.option} 
+                              name="choice" /> {choice.option}
                             </div>
                           )
                         })
                       }
-                      
+
                     </form>
-                    
+
                   </MDBCardBody>
                   {
                   <MDBCardFooter>
@@ -184,23 +184,24 @@ export default function GuessingContestPage () {
       }
 
     //var data = Get_Poll();
-    
+
     const handleEnd = (e,correctAnswer,question) => {
         e.preventDefault();
         console.log("Answer chosen is", correctAnswer)
         console.log("Question is", question)
         //question.isActive = false
         End_Contest(correctAnswer, question)
-
+        alert("Contest ended successfully.")
+        window.location.href = "/contest";
     }
-    
+
     const handleGuess = (e,guessAnswer,question) => {
         e.preventDefault();
         console.log("Data???",guessAnswer)
         //console.log("i:", i)
         //console.log("data[i]:", data[i])
+        alert("Successfully Answered.")
         Update_Contest(question, guessAnswer)
-
     }
 
 
@@ -221,7 +222,7 @@ export default function GuessingContestPage () {
                 </div>
                 }
 
-        
+
 
                 <div>
 
@@ -236,9 +237,9 @@ export default function GuessingContestPage () {
                                     {
                                         data.map( (x, i)=>
                                         {
-                                           
+
                                             return(
-                                                    
+
 
                                                     <div className="row mb-3">
                                                         <div class="form-group col-md-4">
