@@ -12,8 +12,8 @@ export default function ReportResults () {
         Navigate("/reporttypes", {state : type});
 
     }
-    
-    
+
+
 
     return (
         <div>
@@ -22,11 +22,11 @@ export default function ReportResults () {
         <button onClick={(e) => handleGo(e,"user")}>User Reports</button>
         {"    "}
 
-        <button onClick={(e) => handleGo(e, "bug")}>Bug Reports</button>
+        <button onClick={(e) => handleGo(e, "bugs")}>Bug Reports</button>
         {"    "}
 
         <button onClick={(e) => handleGo(e, "TFFmedya")}>TFFMedya Reports</button>
-        
+
         </div>
-    )   
+    )
 }
